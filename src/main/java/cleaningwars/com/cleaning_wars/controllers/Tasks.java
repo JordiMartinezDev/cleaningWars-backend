@@ -7,6 +7,9 @@ import cleaningwars.com.cleaning_wars.models.Task;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -26,6 +29,14 @@ public class Tasks {
     public String getMethodName(@RequestParam String name, @RequestParam String icon, @RequestParam int score) {
         return "Created, good job";
     }
+
+    @PostMapping("path")
+    public String postMethodName(@RequestBody String entity) {
+        //TODO: process POST request
+        
+        return entity;
+    }
+    
     
     
 }
