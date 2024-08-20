@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class BasicController {
     @GetMapping("/")
     public String getMethodName() {
-        return "Hello";
+        return "UserName";
     }
     
 }
