@@ -2,16 +2,24 @@ package cleaningwars.com.cleaning_wars.models;
 
 public class Task {
 
-    public Task(String name, String icon, Double score) {
+    // --- Constructor ---
+
+    public Task(String name, String icon, int i) {
         this.name = name;
         this.icon = icon;
-        this.score = score;
+        this.score = i;
     }
+
+    // --- Variables ---
+
     private Long id;
     private String name;
     private String creator;
     private String icon;
-    private Double score;
+    private int score;
+
+    // --- Getters & Setters ---
+
     public Long getId() {
         return id;
     }
@@ -36,10 +44,10 @@ public class Task {
     public void setIcon(String icon) {
         this.icon = icon;
     }
-    public Double getScore() {
+    public int getScore() {
         return score;
     }
-    public void setScore(Double score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
