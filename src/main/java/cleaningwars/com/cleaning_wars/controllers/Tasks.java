@@ -30,7 +30,7 @@ public class Tasks {
         return "Created, good job";
     }
 
-    @PostMapping("path")
+    @PostMapping("/tasks/newtask")
     public String postMethodName(@RequestBody String entity) {
         //TODO: process POST request
         
