@@ -6,6 +6,8 @@ import cleaningwars.com.cleaning_wars.model.Task;
 import cleaningwars.com.cleaning_wars.repositories.TasksRepository;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,22 +25,11 @@ public class Tasks {
     @Autowired
     TasksRepository tasksRepository;
 
-    Task task = new Task("kitchen","baby",3);
 
-    @GetMapping("/tasks")
-    public String getMethodName(Model model) {
-        
-        Task task = new Task("Clean kitchen", "kitchen", 7);
-        model.addAttribute("task", task);
-        return "Tasks";
+    @GetMapping("/getTaskList")
+    public List<Task> getMethodName() {
+        return tasksRepository.getTaskList();
     }
-    @GetMapping("/tasks/newtask")
-    public String getMethodName(@RequestParam String name, @RequestParam String icon, @RequestParam int score) {
-        return "Created, good job";
-    }
-
-    
-    
     
     
 }
