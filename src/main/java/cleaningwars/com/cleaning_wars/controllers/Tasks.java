@@ -2,9 +2,13 @@ package cleaningwars.com.cleaning_wars.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import cleaningwars.com.cleaning_wars.models.Task;
+import cleaningwars.com.cleaning_wars.model.Task;
+import cleaningwars.com.cleaning_wars.repositories.TasksRepository;
+import jakarta.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController()
 
 public class Tasks {
+    @Autowired
+    TasksRepository tasksRepository;
 
+    Task task = new Task("kitchen","baby",3);
 
     @GetMapping("/tasks")
     public String getMethodName(Model model) {
@@ -31,7 +38,8 @@ public class Tasks {
     }
 
     @PostMapping("/tasks/newtask")
-    public String postMethodName(@RequestBody String entity) {
+    public String postMethodName(@RequestBody @Valid String entity, BindingResult result) {
+        if(result.hasErrors() == true) System.out.println("Error in data validation process"); //throw exception
         //TODO: process POST request
         
         return entity;

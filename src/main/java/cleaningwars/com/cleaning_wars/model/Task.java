@@ -1,4 +1,10 @@
-package cleaningwars.com.cleaning_wars.models;
+package cleaningwars.com.cleaning_wars.model;
+
+import org.springframework.stereotype.Component;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 public class Task {
 
@@ -13,9 +19,12 @@ public class Task {
     // --- Variables ---
 
     private Long id;
+    @NotBlank
     private String name;
     private String creator;
+    @NotBlank
     private String icon;
+    @Min(0)
     private int score;
 
     // --- Getters & Setters ---
