@@ -22,10 +22,10 @@ public class TasksServiceImplementation implements TaskService{
     public Task getTask(int index) {
         return tasksRepository.getTask(index);
     }
-    public int getTaskIndex(String id){
-
-        for(int i = 0; i< getTaskList().size(); i++){
-            if(getTask(i).getId().equals(id)) return i;
+    public String getTaskIndex(String id){
+        List<Task> tasks = tasksRepository.getTaskList();
+        for(int i = 0; i< tasks.size(); i++){
+            if(tasks.get(i).getId().equals(id)) return id;
         }
 
         return Constants.NOT_FOUND;

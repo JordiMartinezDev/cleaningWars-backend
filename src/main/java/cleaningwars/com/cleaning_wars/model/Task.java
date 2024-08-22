@@ -10,7 +10,8 @@ public class Task {
 
     // --- Constructor ---
 
-    public Task(String name, String icon, int i) {
+    public Task( String id, String name, String icon, int i) {
+        this.id = 1;
         this.name = name;
         this.icon = icon;
         this.score = i;
@@ -18,7 +19,7 @@ public class Task {
 
     // --- Variables ---
 
-    private Long id;
+    private String id;
     @NotBlank
     private String name;
     private String creator;
@@ -29,10 +30,10 @@ public class Task {
 
     // --- Getters & Setters ---
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getName() {

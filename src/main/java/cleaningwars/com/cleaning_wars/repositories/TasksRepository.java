@@ -13,10 +13,10 @@ public class TasksRepository {
     
     // Populating the data as we don't have DB connection yet
     private List<Task> tasks = Arrays.asList(
-        new Task("Kitchen","kitchen",5),
-        new Task("Bathroom","toilet",4),
-        new Task("Sweep room","toilet",2),
-        new Task("Cook lunch","toilet",3)
+        new Task("1","Kitchen","kitchen",5),
+        new Task("2","Bathroom","toilet",4),
+        new Task("3","Sweep room","toilet",2),
+        new Task("4","Cook lunch","toilet",3)
 
     );
 

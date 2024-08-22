@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,8 +28,13 @@ public class Tasks {
 
 
     @GetMapping("/getTaskList")
-    public List<Task> getMethodName() {
+    public List<Task> getTaskList() {
         return tasksRepository.getTaskList();
+    }
+
+    @GetMapping("/task/{id}")
+    public Task getMethodName(@RequestParam String param) {
+        return new Task("1","TestThingy","myIcon",6);
     }
     
     

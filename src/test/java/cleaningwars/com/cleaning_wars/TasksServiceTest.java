@@ -27,7 +27,7 @@ public class TasksServiceTest {
 
     @Test
     public void getTasksFromRepository() {
-        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("kitchen","baby",3), new Task("32sdf","baby23",3), new Task("asf2","baby",3)));
+        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("1","kitchen","baby",3), new Task("2","32sdf","baby23",3), new Task("3","asf2","baby",3)));
 
         List<Task> result = tasksService.getTaskList();
         
@@ -37,7 +37,7 @@ public class TasksServiceTest {
     }
 
     public void getTaskIndexTest(){
-        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("kitchen","baby",3), new Task("32sdf","baby23",3), new Task("asf2","baby",3)));
+        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("1","kitchen","baby",3), new Task("2","32sdf","baby23",3), new Task("3","asf2","baby",3)));
 
         List<Task> result = tasksService.getTaskList();
 
