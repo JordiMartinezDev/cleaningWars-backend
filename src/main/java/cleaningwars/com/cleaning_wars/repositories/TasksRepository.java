@@ -16,5 +16,7 @@ public class TasksRepository {
     public List<Task> getTaskList(){
         return allTasks;
     }
-
+    public Task getTask(int index){
+        return allTasks.get(index);
+    }
 }

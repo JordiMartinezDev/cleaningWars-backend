@@ -37,13 +37,7 @@ public class Tasks {
         return "Created, good job";
     }
 
-    @PostMapping("/tasks/newtask")
-    public String postMethodName(@RequestBody @Valid String entity, BindingResult result) {
-        if(result.hasErrors() == true) System.out.println("Error in data validation process"); //throw exception
-        //TODO: process POST request
-        
-        return entity;
-    }
+    
     
     
     

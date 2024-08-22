@@ -1,5 +1,6 @@
 package cleaningwars.com.cleaning_wars;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import cleaningwars.com.cleaning_wars.model.Task;
 
 import cleaningwars.com.cleaning_wars.repositories.TasksRepository;
-import cleaningwars.com.cleaning_wars.services.TasksService;
+import cleaningwars.com.cleaning_wars.services.TasksServiceImplementation;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,13 +23,25 @@ public class TasksServiceTest {
     private TasksRepository tasksRepository;
 
     @InjectMocks
-    private TasksService tasksService;
+    private TasksServiceImplementation tasksService;
 
     @Test
     public void getTasksFromRepository() {
-        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("kitchen","baby",3), new Task("32sdf","baby",3), new Task("asf2","baby",3)));
+        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("kitchen","baby",3), new Task("32sdf","baby23",3), new Task("asf2","baby",3)));
 
         List<Task> result = tasksService.getTaskList();
         
+        assertEquals("kitchen", result.get(0).getName());
+        assertEquals("baby23", result.get(1).getIcon());
+
+    }
+
+    public void getTaskIndexTest(){
+        when(tasksRepository.getTaskList()).thenReturn(Arrays.asList(new Task("kitchen","baby",3), new Task("32sdf","baby23",3), new Task("asf2","baby",3)));
+
+        List<Task> result = tasksService.getTaskList();
+
+
+
     }
 }
