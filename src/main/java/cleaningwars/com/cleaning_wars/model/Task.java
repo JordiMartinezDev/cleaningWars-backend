@@ -1,52 +1,53 @@
 package cleaningwars.com.cleaning_wars.model;
 
-import org.springframework.stereotype.Component;
 
-import jakarta.validation.constraints.Max;
+import org.springframework.stereotype.Component;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import java.util.Objects;
 
+@Entity
 public class Task {
 
     // --- Constructor ---
 
-    public Task( String id, String name, String icon, int i) {
-        this.id = 1;
-        this.name = name;
-        this.icon = icon;
-        this.score = i;
+    // public Task( String id, String name, String icon, int i) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.icon = icon;
+    //     this.score = i;
+    // }
+
+    public Task(){
+
     }
-
     // --- Variables ---
-
-    private String id;
-    @NotBlank
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Not sure if this is actually needed
+    private Long id;
     private String name;
-    private String creator;
-    @NotBlank
+    private String home;
     private String icon;
-    @Min(0)
     private int score;
 
     // --- Getters & Setters ---
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
-        this.id = id;
-    }
+    
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
     }
-    public String getCreator() {
-        return creator;
+    public String getHome() {
+        return home;
     }
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setHome(String home) {
+        this.home = home;
     }
     public String getIcon() {
         return icon;

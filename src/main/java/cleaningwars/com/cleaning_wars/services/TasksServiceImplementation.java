@@ -4,32 +4,37 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.Utils.Constants;
 import cleaningwars.com.cleaning_wars.model.Task;
-import cleaningwars.com.cleaning_wars.repositories.TasksRepository;
+import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 
-@Component
+@Service
 public class TasksServiceImplementation implements TaskService{
 
     @Autowired
-    private TasksRepository tasksRepository;
+    private TaskRepository taskRepository;
 
-    public List<Task> getTaskList() {
-        return tasksRepository.getTaskList();
+    @Override
+    public Task addNewTask(Task task){
+
+        return taskRepository.save(task);
+
+    }
+    // @Override
+    // public List<Task> getall(){
+    //     // return taskRepository.findAll().iterator();
+    //     // return taskRepository.findAll().iterator();
+    // }
+    @Override
+    public Task getTaskById(Long id){
+        return taskRepository.findById(id).get();
     }
 
-    public Task getTask(int index) {
-        return tasksRepository.getTask(index);
+    @Override
+    public void deleteById(Long id){
+        taskRepository.deleteById(id);
     }
-    public String getTaskIndex(String id){
-        List<Task> tasks = tasksRepository.getTaskList();
-        for(int i = 0; i< tasks.size(); i++){
-            if(tasks.get(i).getId().equals(id)) return id;
-        }
-
-        return Constants.NOT_FOUND;
-    }
-
-
+    
 }
