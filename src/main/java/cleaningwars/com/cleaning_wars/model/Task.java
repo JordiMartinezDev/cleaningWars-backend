@@ -5,14 +5,16 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
 
+
+@Entity
 @Getter
 @Setter
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Task {
     
     @Id
