@@ -22,11 +22,10 @@ public class TasksServiceImplementation implements TaskService{
         return taskRepository.save(task);
 
     }
-    // @Override
-    // public List<Task> getall(){
-    //     // return taskRepository.findAll().iterator();
-    //     // return taskRepository.findAll().iterator();
-    // }
+    @Override
+    public List<Task> getall(){
+        return (List<Task>) taskRepository.findAll();
+    }
     @Override
     public Task getTaskById(Long id){
         return taskRepository.findById(id).get();
