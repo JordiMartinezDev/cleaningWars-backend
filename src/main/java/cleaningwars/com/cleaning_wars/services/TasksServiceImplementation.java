@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.Utils.Constants;
+import cleaningwars.com.cleaning_wars.entity.Home;
 import cleaningwars.com.cleaning_wars.entity.Task;
+import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 
 @Service
@@ -15,10 +17,13 @@ public class TasksServiceImplementation implements TaskService{
 
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired HomeRepository homeRepository;
 
     @Override
-    public Task addNewTask(Task task){
+    public Task addNewTask(Task task, Long homeId){
 
+        Home home = homeRepository.findById(homeId).get();
+        task.setHome(home);
         return taskRepository.save(task);
 
     }

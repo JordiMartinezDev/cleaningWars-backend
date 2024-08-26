@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -40,10 +41,10 @@ public class TaskController {
     }
     
     @PostMapping("/addnewtask")
-    public ResponseEntity<Task /*HttpStatus */> postMethodName(@RequestBody @Valid Task task) {
+    public Task postMethodName(@RequestBody @Valid Task task, @RequestParam Long homeId) {
 
-        taskService.addNewTask(task);
-        return new ResponseEntity<>(taskService.addNewTask(task),HttpStatus.CREATED);
+        return taskService.addNewTask(task,homeId);
+        // return new ResponseEntity<>(taskService.addNewTask(task),HttpStatus.CREATED);
         // return new ResponseEntity<>(HttpStatus.CREATED);
     }
     

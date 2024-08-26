@@ -20,10 +20,10 @@ public class CleaningWarsApplication implements CommandLineRunner{
 	@Override
 	public void run(String...args) throws Exception{
 		Task[] preSetTasks = new Task[] {
-			new Task(1L, "Kitchen", "Test home", "dishes", 4),
-			new Task(2L, "Bathroom", "Test home", "toilet", 2),
-			new Task(3L, "Sweep room", "Test home", "sweep", 2),
-			new Task(4L, "Iron clothes", "Test home", "iron", 6)
+			// new Task(1L, "Kitchen", "Test home", "dishes", 4),
+			// new Task(2L, "Bathroom", "Test home", "toilet", 2),
+			// new Task(3L, "Sweep room", "Test home", "sweep", 2),
+			// new Task(4L, "Iron clothes", "Test home", "iron", 6)
 
 		};
 

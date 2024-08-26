@@ -22,8 +22,10 @@ public class Task {
     private Long id;
 
     private String name;
-    private String home;
     private String icon;
     private int score;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "home_id", referencedColumnName = "id")
+    private Home home;
 }
