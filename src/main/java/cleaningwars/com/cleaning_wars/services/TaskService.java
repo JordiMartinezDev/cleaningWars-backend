@@ -2,7 +2,7 @@ package cleaningwars.com.cleaning_wars.services;
 
 import java.util.List;
 
-import cleaningwars.com.cleaning_wars.model.Task;
+import cleaningwars.com.cleaning_wars.entity.Task;
 
 public interface TaskService {
 

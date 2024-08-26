@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.model;
+package cleaningwars.com.cleaning_wars.entity;
 
 
 import org.springframework.stereotype.Component;

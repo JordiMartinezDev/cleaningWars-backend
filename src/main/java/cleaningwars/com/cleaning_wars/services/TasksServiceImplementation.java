@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.Utils.Constants;
-import cleaningwars.com.cleaning_wars.model.Task;
+import cleaningwars.com.cleaning_wars.entity.Task;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 
 @Service

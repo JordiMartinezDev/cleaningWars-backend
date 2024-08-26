@@ -2,7 +2,7 @@ package cleaningwars.com.cleaning_wars.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import cleaningwars.com.cleaning_wars.model.Task;
+import cleaningwars.com.cleaning_wars.entity.Task;
 import cleaningwars.com.cleaning_wars.services.TaskService;
 import jakarta.validation.Valid;
 
