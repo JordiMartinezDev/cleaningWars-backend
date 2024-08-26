@@ -6,4 +6,5 @@ import cleaningwars.com.cleaning_wars.entity.Task;
 
 public interface TaskRepository extends CrudRepository<Task,Long>{
     
+    Task findByHomeId(Long id); // findBy{foreign reference, such as homeId} will automatically create the SQL query
 }

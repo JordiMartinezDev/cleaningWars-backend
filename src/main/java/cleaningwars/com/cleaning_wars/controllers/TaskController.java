@@ -30,7 +30,8 @@ public class TaskController {
 
     @GetMapping("/getall")
     public List<Task> getTaskList() {
-        return taskService.getall(); // Can be done this way, no need for the status codes and so on... it looks to be handled automatically
+        return taskService.getall(); 
+        // Can be done this way, no need for the status codes and so on... it looks to be handled automatically
     }
 
     @GetMapping("/{id}")
@@ -41,10 +42,9 @@ public class TaskController {
     }
     
     @PostMapping("/addnewtask")
-    public Task postMethodName(@RequestBody @Valid Task task, @RequestParam Long homeId) {
+    public ResponseEntity<Task> postMethodName(@RequestBody @Valid Task task, @RequestParam Long homeId) {
 
-        return taskService.addNewTask(task,homeId);
-        // return new ResponseEntity<>(taskService.addNewTask(task),HttpStatus.CREATED);
+        return new ResponseEntity<>(taskService.addNewTask(task,homeId),HttpStatus.CREATED);
         // return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
