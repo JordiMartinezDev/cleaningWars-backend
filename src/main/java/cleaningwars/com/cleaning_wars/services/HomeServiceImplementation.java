@@ -1,5 +1,7 @@
 package cleaningwars.com.cleaning_wars.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,13 @@ public class HomeServiceImplementation implements HomeService{
     public void createHome(Home home){
         homeRepository.save(home);
     }
+    public Home getHomeById(Long id){
+        return null;
+    }
+
+    public List<Home> getAllHomes(){
+        return null;
+    }
     public void editHomeName(Home home, Long id){
 
     }
@@ -27,4 +36,6 @@ public class HomeServiceImplementation implements HomeService{
     public void removeHome(Long id){
 
     }
+
+    
 }
