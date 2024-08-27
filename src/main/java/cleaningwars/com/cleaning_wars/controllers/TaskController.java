@@ -30,7 +30,7 @@ public class TaskController {
 
     @GetMapping("/getall")
     public List<Task> getTaskList() {
-        return taskService.getall(); 
+        return taskService.getallTasks(); 
         // Can be done this way, no need for the status codes and so on... it looks to be handled automatically
     }
 
@@ -51,10 +51,14 @@ public class TaskController {
     @PutMapping("/{id}")
     public void putMethodName(@PathVariable String id, @RequestBody Task task) {
     }
-    
+    @PutMapping("/tasks/{id}")
+public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
+    taskService.updateTask(id, task);
+    return new ResponseEntity<>(task, HttpStatus.OK);
+}
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id){
-        taskService.deleteById(id);
+        taskService.deleteTaskById(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
