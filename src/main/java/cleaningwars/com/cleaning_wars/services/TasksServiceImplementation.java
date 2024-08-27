@@ -28,7 +28,7 @@ public class TasksServiceImplementation implements TaskService{
 
     }
     @Override
-    public List<Task> getall(){
+    public List<Task> getallTasks(){
         return (List<Task>) taskRepository.findAll();
     }
     @Override
@@ -37,7 +37,7 @@ public class TasksServiceImplementation implements TaskService{
     }
 
     @Override
-    public void deleteById(Long id){
+    public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
     }
     

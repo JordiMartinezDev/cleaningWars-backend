@@ -8,8 +8,8 @@ public interface TaskService {
 
     
     public Task addNewTask(Task task, Long homeId);
-    public List<Task> getall();
+    public List<Task> getallTasks();
     public Task getTaskById(Long id);
-    public void deleteById(Long id);
+    public void deleteTaskById(Long id);
 
 }

@@ -33,7 +33,7 @@ public class HomeServiceImplementation implements HomeService{
     public void removeUserFromHome(){
 
     }
-    public void removeHome(Long id){
+    public void deleteHome(Long id){
 
     }
 

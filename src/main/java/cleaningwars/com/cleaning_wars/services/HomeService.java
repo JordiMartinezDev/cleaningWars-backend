@@ -12,5 +12,5 @@ public interface HomeService {
     void editHomeName(Home home, Long id);
     void addUserToHome(); // addUserToHome(User user, Long id) once users are created
     void removeUserFromHome(); // same as above
-    void removeHome(Long id);
+    void deleteHome(Long id);
 } 
