@@ -12,6 +12,8 @@ import lombok.Setter;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
 @Setter
@@ -28,6 +30,7 @@ public class Home {
     private Set<User> users;
 
     @OneToMany(mappedBy = "home")
+    @JsonIgnore
     private Set<Task> tasks;
 
     @OneToMany(mappedBy = "home")
