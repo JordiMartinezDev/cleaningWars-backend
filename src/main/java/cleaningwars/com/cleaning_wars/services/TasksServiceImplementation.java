@@ -3,10 +3,8 @@ package cleaningwars.com.cleaning_wars.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import cleaningwars.com.cleaning_wars.Utils.Constants;
 import cleaningwars.com.cleaning_wars.entity.Home;
 import cleaningwars.com.cleaning_wars.entity.Task;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;

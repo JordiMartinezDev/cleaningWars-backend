@@ -1,13 +1,8 @@
 package cleaningwars.com.cleaning_wars.entity;
 
 
-import org.springframework.stereotype.Component;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.Objects;
 
 
 @Entity
