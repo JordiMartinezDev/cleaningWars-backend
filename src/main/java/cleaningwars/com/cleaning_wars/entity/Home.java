@@ -1,5 +1,6 @@
 package cleaningwars.com.cleaning_wars.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class Home {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "home")
+    @OneToMany(mappedBy = "home",cascade = CascadeType.ALL) 
     private Set<User> users;
 
     @OneToMany(mappedBy = "home")

@@ -48,7 +48,7 @@ public class HomeController {
         }
 
         // Associate the user with the home
-        user.setHome(home);  // Assuming user has a home reference
+        //user.setHome(home);  when user has a home reference
         //userService.updateUser(user); // Update the user in the database
 
         return new ResponseEntity<>("User added to home successfully", HttpStatus.OK);

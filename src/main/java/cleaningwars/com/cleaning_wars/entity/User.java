@@ -1,5 +1,6 @@
 package cleaningwars.com.cleaning_wars.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Getter
 @Setter
@@ -20,12 +22,24 @@ import lombok.Setter;
 @Table(name = "users")
 public class User {
 
+   
+    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "home_id", referencedColumnName = "id")
-    private Home home;
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    //Password should be hashed using BCrypt
+    @Column(nullable = false)
+    private String password;  
+
+    // @ManyToOne
+    // @JoinColumn(name = "home_id", referencedColumnName = "id")
+    // private Home home;
 }
