@@ -52,6 +52,19 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin -->
+	<dependency>
+		<groupId>org.openapitools</groupId>
+		<artifactId>openapi-generator-maven-plugin</artifactId>
+		<version>7.8.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- OPENAPI dependency -->
+	<dependency>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-ui</artifactId>
+		<version>1.8.0</version>
+	</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>

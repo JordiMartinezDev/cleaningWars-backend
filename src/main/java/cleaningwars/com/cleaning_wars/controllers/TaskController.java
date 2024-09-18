@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController()
-@RequestMapping("/task")
+@RequestMapping("/api/task")
 public class TaskController {
     @Autowired
     TaskService taskService;
