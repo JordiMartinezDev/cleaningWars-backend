@@ -39,7 +39,7 @@ public class User {
     @Column(nullable = false)
     private String password;  
 
-    // @ManyToOne
-    // @JoinColumn(name = "home_id", referencedColumnName = "id")
-    // private Home home;
+    @ManyToOne
+    @JoinColumn(name = "home_id", referencedColumnName = "id")
+    private Home home;
 }
