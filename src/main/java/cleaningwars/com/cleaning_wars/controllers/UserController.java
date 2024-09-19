@@ -9,6 +9,9 @@ import cleaningwars.com.cleaning_wars.entity.User;
 import cleaningwars.com.cleaning_wars.services.HomeService;
 import cleaningwars.com.cleaning_wars.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -23,8 +26,16 @@ public class UserController {
 
     @PostMapping("/register") 
     public ResponseEntity<User> registerUser(@Valid @RequestBody User newUser) {
-         return new ResponseEntity<>(userService.createUser(newUser),HttpStatus.CREATED);
+         userService.createUser(newUser);
+         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<User> postMethodName(@RequestBody User user) {
+        
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
