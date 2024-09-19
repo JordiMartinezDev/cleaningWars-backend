@@ -20,10 +20,8 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User createUser(User user) {
-        
-        String encodedPassword = passwordEncoder.encodePassword(user.getPassword());
-        user.setPassword(encodedPassword);
 
+        user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
         user.setHome(homeService.createDefaultHome());
         
         return userRepository.save(user);

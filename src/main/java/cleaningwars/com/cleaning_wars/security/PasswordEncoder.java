@@ -1,10 +1,14 @@
 package cleaningwars.com.cleaning_wars.security;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
 public class PasswordEncoder {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    
     public PasswordEncoder() {
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
@@ -12,7 +16,6 @@ public class PasswordEncoder {
     public String encodePassword(String plainPassword) {
         return bCryptPasswordEncoder.encode(plainPassword);
     }
-
     public boolean matchesPassword(String plainPassword, String encodedPassword) {
         return bCryptPasswordEncoder.matches(plainPassword, encodedPassword);
     }
