@@ -11,14 +11,15 @@ import java.util.List;
 public class UserServiceImplementation implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
+    @Autowired
+    HomeService homeService;
 
     @Override
     public User createUser(User user) {
-
+        user.setHome(homeService.createDefaultHome());
         return userRepository.save(user);
     }
-
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);

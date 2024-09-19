@@ -19,11 +19,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "users") // users is a reserved keyword in SQL. Therefore, we can't use it as a table name
 public class User {
 
-   
-    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

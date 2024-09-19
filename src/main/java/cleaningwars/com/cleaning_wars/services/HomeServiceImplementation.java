@@ -19,6 +19,9 @@ public class HomeServiceImplementation implements HomeService{
     @Autowired
     UserRepository userRepository;
 
+    public Home createDefaultHome(){
+        return new Home();
+    }
     public void createHome(Home home){
         homeRepository.save(home);
     }

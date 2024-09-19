@@ -25,7 +25,7 @@ public class Home {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String name = "Home";
 
     @OneToMany(mappedBy = "home",cascade = CascadeType.ALL) 
     private Set<User> users;

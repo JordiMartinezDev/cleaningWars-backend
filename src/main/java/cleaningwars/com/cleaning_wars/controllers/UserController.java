@@ -1,5 +1,7 @@
 package cleaningwars.com.cleaning_wars.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,19 +14,15 @@ import cleaningwars.com.cleaning_wars.services.UserService;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService, HomeService homeService) {
-        this.userService = userService;
-    }
+    @Autowired
+    UserService userService;
+    @Autowired
+    HomeService homeService;
     
-    @PostMapping("/usersignup") 
-    public User registerUser(@RequestBody User newUser) {
-        
-         User user = new User();
-         user.setUserName(newUser.getUserName());
-         userService.createUser(user);
-         return user;
+    @PostMapping("/register") 
+    public ResponseEntity<User> registerUser(@RequestBody User newUser) {
+         userService.createUser(newUser);
+         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
