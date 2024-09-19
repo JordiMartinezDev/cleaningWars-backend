@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cleaningwars.com.cleaning_wars.entity.User;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
+import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
 
 import java.util.List;
 
@@ -14,10 +15,17 @@ public class UserServiceImplementation implements UserService {
     UserRepository userRepository;
     @Autowired
     HomeService homeService;
+    @Autowired
+    PasswordEncoder passwordEncoder; 
 
     @Override
     public User createUser(User user) {
+        
+        String encodedPassword = passwordEncoder.encodePassword(user.getPassword());
+        user.setPassword(encodedPassword);
+
         user.setHome(homeService.createDefaultHome());
+        
         return userRepository.save(user);
     }
     @Override
