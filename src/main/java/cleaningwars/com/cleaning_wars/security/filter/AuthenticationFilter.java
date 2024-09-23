@@ -84,6 +84,13 @@ public Authentication attemptAuthentication(HttpServletRequest request, HttpServ
         .withSubject(authResult.getName())
         .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
         .sign(Algorithm.HMAC512(secretKey));
-        response.addHeader(SecurityConstants.AUTHORIZATION, SecurityConstants.BEARER + token);
+
+        String refreshToken = JWT.create()
+            .withSubject(authResult.getName())
+            .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.REFRESH_TOKEN_EXPIRATION)) // longer expiration
+            .sign(Algorithm.HMAC512(secretKey));
+
+            response.addHeader(SecurityConstants.AUTHORIZATION, SecurityConstants.BEARER + token);
+            response.addHeader(SecurityConstants.REFRESH_TOKEN, refreshToken); 
     }
 }

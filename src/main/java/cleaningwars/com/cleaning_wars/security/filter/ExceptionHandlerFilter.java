@@ -6,6 +6,9 @@ import java.io.StringWriter;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
+
+import io.jsonwebtoken.JwtException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,6 +31,13 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter{
         response.getWriter().flush();
         
     } 
+    catch(JWTVerificationException e)
+    {
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.getWriter().write("JWT not valid");
+        response.getWriter().flush();
+    }
+
         catch(RuntimeException e){
 
             // Optionally include stack trace in the response for debugging purposes (not recommended in production)
