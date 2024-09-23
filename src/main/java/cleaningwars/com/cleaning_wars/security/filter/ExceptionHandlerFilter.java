@@ -31,13 +31,12 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter{
         catch(RuntimeException e){
 
             // Optionally include stack trace in the response for debugging purposes (not recommended in production)
-            // StringWriter sw = new StringWriter();
-            // e.printStackTrace(new PrintWriter(sw));
-            // String exceptionAsString = sw.toString();
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
 
-            // Set error status and return exception message
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            // response.getWriter().write("Error occurred: " + exceptionAsString);
+            response.getWriter().write("Error occurred: " + exceptionAsString);
         }
     }
     

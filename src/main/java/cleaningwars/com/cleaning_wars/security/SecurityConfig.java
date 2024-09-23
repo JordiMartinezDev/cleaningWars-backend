@@ -24,7 +24,8 @@ public class SecurityConfig {
     CustomAuthenticationManager customAuthenticationManager;
     @Autowired
     JWTConfig jwtConfig;
-    
+    @Autowired
+    JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,13 +39,12 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, SecurityConstants.REGISTER_PATH).permitAll()  // Allow register path
                 .requestMatchers("/h2/**").permitAll()  // H2 console
                 .requestMatchers("/api/**").permitAll()  // Allow access to all the API for dev purposes
-                // .requestMatchers("/api/users/login").access(new AuthorizationManager())
                 .anyRequest().authenticated()  // All other requests require authentication
                 
             )
             .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
             .addFilter(authFilter)
-            .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
+            .addFilterAfter(jwtAuthorizationFilter, AuthenticationFilter.class)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Use stateless sessions
             );
