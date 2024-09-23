@@ -1,15 +1,32 @@
 package cleaningwars.com.cleaning_wars.security.manager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 
+import cleaningwars.com.cleaning_wars.entity.User;
+import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
+import cleaningwars.com.cleaning_wars.services.UserService;
+import lombok.AllArgsConstructor;
+
+@Component
+@AllArgsConstructor
 public class CustomAuthenticationManager implements AuthenticationManager{
+
+    private UserService userService;
+    private PasswordEncoder pwEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'authenticate'");
+        User user = userService.getUserByUsername(authentication.getName());
+        if(!pwEncoder.matches(authentication.getCredentials().toString(), user.getPassword())){
+            throw new BadCredentialsException("Incorrect Login/Password");
+        }
+        return new UsernamePasswordAuthenticationToken(authentication.getName(), user.getPassword());
     }
     
 }

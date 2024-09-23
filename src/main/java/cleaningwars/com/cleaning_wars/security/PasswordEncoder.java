@@ -16,7 +16,7 @@ public class PasswordEncoder {
     public String encodePassword(String plainPassword) {
         return bCryptPasswordEncoder.encode(plainPassword);
     }
-    public boolean matchesPassword(String plainPassword, String encodedPassword) {
+    public boolean matches(String plainPassword, String encodedPassword) {
         return bCryptPasswordEncoder.matches(plainPassword, encodedPassword);
     }
 }

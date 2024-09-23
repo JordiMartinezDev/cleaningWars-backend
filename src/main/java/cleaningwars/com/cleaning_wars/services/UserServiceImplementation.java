@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import cleaningwars.com.cleaning_wars.entity.User;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -32,6 +34,13 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        
+       Optional<User> user = userRepository.findByUsername(username);
+       return unwrapUser(user, 404L);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -43,5 +52,10 @@ public class UserServiceImplementation implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+    
+    static User unwrapUser(Optional<User> entity, Long id){
+        if(entity.isPresent()) return entity.get();
+        else throw new EntityNotFoundException();
     }
 }

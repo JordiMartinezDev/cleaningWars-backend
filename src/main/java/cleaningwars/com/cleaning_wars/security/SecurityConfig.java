@@ -1,10 +1,10 @@
 package cleaningwars.com.cleaning_wars.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authorization.AuthorizationManager;
-import org.springframework.security.config.Customizer;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,15 +12,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import cleaningwars.com.cleaning_wars.security.filter.AuthenticationFilter;
 import cleaningwars.com.cleaning_wars.security.filter.ExceptionHandlerFilter;
+import cleaningwars.com.cleaning_wars.security.filter.JWTAuthorizationFilter;
+import cleaningwars.com.cleaning_wars.security.manager.CustomAuthenticationManager;
 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    CustomAuthenticationManager customAuthenticationManager;
+    @Autowired
+    JWTConfig jwtConfig;
+    
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        AuthenticationFilter authFilter = new AuthenticationFilter();
+        AuthenticationFilter authFilter = new AuthenticationFilter(customAuthenticationManager, jwtConfig);
         authFilter.setFilterProcessesUrl("/api/users/authenticate");
         http
             .csrf(csrf -> csrf
@@ -36,6 +44,7 @@ public class SecurityConfig {
             )
             .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
             .addFilter(authFilter)
+            .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Use stateless sessions
             );
