@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import cleaningwars.com.cleaning_wars.security.filter.AuthenticationFilter;
+import cleaningwars.com.cleaning_wars.security.filter.ExceptionHandlerFilter;
 
 
 @Configuration
@@ -32,7 +33,9 @@ public class SecurityConfig {
                 // .requestMatchers("/api/users/login").access(new AuthorizationManager())
                 .anyRequest().authenticated()  // All other requests require authentication
                 
-            ).addFilter(authFilter)
+            )
+            .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
+            .addFilter(authFilter)
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Use stateless sessions
             );
