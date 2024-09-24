@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.entity;
+package cleaningwars.com.cleaning_wars.entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,13 +27,15 @@ public class Home {
     private Long id;
     private String name = "Home";
 
-    @OneToMany(mappedBy = "home",cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "home") 
+    @JsonIgnore
     private Set<User> users;
 
-    @OneToMany(mappedBy = "home")
+    @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Task> tasks;
 
-    @OneToMany(mappedBy = "home")
+    @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Event> events;
 }

@@ -1,5 +1,7 @@
-package cleaningwars.com.cleaning_wars.entity;
+package cleaningwars.com.cleaning_wars.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,7 +22,8 @@ public class Task {
     private String icon;
     private int points;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "home_id", referencedColumnName = "id")
+    @JsonIgnore
     private Home home;
 }

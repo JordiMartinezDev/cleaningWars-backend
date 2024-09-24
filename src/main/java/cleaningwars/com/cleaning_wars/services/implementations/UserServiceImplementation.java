@@ -1,10 +1,13 @@
-package cleaningwars.com.cleaning_wars.services;
+package cleaningwars.com.cleaning_wars.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cleaningwars.com.cleaning_wars.entity.User;
+
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
+import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;

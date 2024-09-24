@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.entity;
+package cleaningwars.com.cleaning_wars.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

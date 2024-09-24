@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.exception;
+package cleaningwars.com.cleaning_wars.exceptions;
 
 
 public class EntityNotFound extends RuntimeException{

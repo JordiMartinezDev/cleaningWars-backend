@@ -1,9 +1,9 @@
-package cleaningwars.com.cleaning_wars.services;
+package cleaningwars.com.cleaning_wars.services.interfaces;
 
 import java.util.List;
 
-import cleaningwars.com.cleaning_wars.entity.Home;
-import cleaningwars.com.cleaning_wars.entity.User;
+import cleaningwars.com.cleaning_wars.entities.Home;
+import cleaningwars.com.cleaning_wars.entities.User;
 
 public interface HomeService {
 

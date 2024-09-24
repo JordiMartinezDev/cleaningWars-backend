@@ -10,8 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import cleaningwars.com.cleaning_wars.entity.Task;
-import cleaningwars.com.cleaning_wars.services.TasksServiceImplementation;
+import cleaningwars.com.cleaning_wars.entities.Task;
+import cleaningwars.com.cleaning_wars.services.implementations.TasksServiceImplementation;
+
 import java.util.Arrays;
 import java.util.List;
 

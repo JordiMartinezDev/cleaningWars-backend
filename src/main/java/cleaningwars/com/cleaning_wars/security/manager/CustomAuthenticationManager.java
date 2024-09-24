@@ -8,9 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import cleaningwars.com.cleaning_wars.entity.User;
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
-import cleaningwars.com.cleaning_wars.services.UserService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 import lombok.AllArgsConstructor;
 
 @Component

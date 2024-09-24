@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import cleaningwars.com.cleaning_wars.entity.Task;
+import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 
 @SpringBootApplication

@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import cleaningwars.com.cleaning_wars.entity.User;
-import cleaningwars.com.cleaning_wars.services.HomeService;
-import cleaningwars.com.cleaning_wars.services.UserService;
+import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

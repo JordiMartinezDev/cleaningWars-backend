@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.services;
+package cleaningwars.com.cleaning_wars.services.implementations;
 
 import java.util.HashSet;
 import java.util.List;
@@ -6,10 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cleaningwars.com.cleaning_wars.entity.Home;
-import cleaningwars.com.cleaning_wars.entity.User;
+import cleaningwars.com.cleaning_wars.entities.Home;
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
+import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 
 @Service
 public class HomeServiceImplementation implements HomeService{

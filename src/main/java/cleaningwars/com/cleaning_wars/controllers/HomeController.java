@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cleaningwars.com.cleaning_wars.entity.Home;
-import cleaningwars.com.cleaning_wars.entity.User;
-import cleaningwars.com.cleaning_wars.services.HomeService;
-import cleaningwars.com.cleaning_wars.services.UserService;
+import cleaningwars.com.cleaning_wars.entities.Home;
+import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

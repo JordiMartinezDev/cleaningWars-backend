@@ -1,14 +1,23 @@
-package cleaningwars.com.cleaning_wars.services;
+package cleaningwars.com.cleaning_wars.services.implementations;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import cleaningwars.com.cleaning_wars.entity.Home;
-import cleaningwars.com.cleaning_wars.entity.Task;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cleaningwars.com.cleaning_wars.entities.Home;
+import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
+import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
+import jakarta.annotation.PostConstruct;
+import com.fasterxml.jackson.core.type.TypeReference;
+import java.io.IOException;
+import java.io.InputStream;
+import org.springframework.core.io.Resource;
 
 @Service
 public class TasksServiceImplementation implements TaskService{
@@ -16,6 +25,8 @@ public class TasksServiceImplementation implements TaskService{
     @Autowired
     private TaskRepository taskRepository;
     @Autowired HomeRepository homeRepository;
+    @Value("classpath:predefined-tasks.json")
+    private Resource tasksJsonFile;
 
     @Override
     public Task addNewTask(Task task, Long homeId){
@@ -42,7 +53,7 @@ public class TasksServiceImplementation implements TaskService{
         // Replace the fields with the updatedTaskData
         existingTask.setName(updatedTask.getName());
         existingTask.setIcon(updatedTask.getIcon());
-        existingTask.setScore(updatedTask.getScore());
+        existingTask.setPoints(updatedTask.getPoints());
         existingTask.setHome(updatedTask.getHome());
 
         // Save the updated task to the database
@@ -54,4 +65,24 @@ public class TasksServiceImplementation implements TaskService{
     }
     
     
+
+    @PostConstruct
+    public void init() {
+        // Only load default tasks if there are no tasks in the database
+        if (taskRepository.count() == 0) {
+            loadDefaultTasks();
+        }
+    }
+
+    private void loadDefaultTasks() {
+        ObjectMapper mapper = new ObjectMapper();
+        try (InputStream inputStream = tasksJsonFile.getInputStream()) {
+            // Mapping JSON data into a list of Task objects
+            List<Task> tasks = mapper.readValue(inputStream, new TypeReference<List<Task>>() {});
+            taskRepository.saveAll(tasks);  
+            System.out.println("Default tasks loaded successfully.");
+        } catch (IOException e) {
+            System.err.println("Unable to load default tasks: " + e.getMessage());
+        }
+    }
 }

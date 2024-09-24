@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.entity;
+package cleaningwars.com.cleaning_wars.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Getter
@@ -28,14 +30,18 @@ public class Event {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "task_id", referencedColumnName = "id")
+    @JsonIgnore
     private Task task;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
+
     private User user;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "home_id", referencedColumnName = "id")
+    @JsonIgnore
     private Home home;
 }
 

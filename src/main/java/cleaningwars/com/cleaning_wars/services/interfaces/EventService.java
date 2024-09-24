@@ -1,7 +1,8 @@
-package cleaningwars.com.cleaning_wars.services;
+package cleaningwars.com.cleaning_wars.services.interfaces;
 
-import cleaningwars.com.cleaning_wars.entity.Event;
 import java.util.List;
+
+import cleaningwars.com.cleaning_wars.entities.Event;
 
 public interface EventService {
 

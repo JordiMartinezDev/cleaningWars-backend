@@ -2,7 +2,9 @@ package cleaningwars.com.cleaning_wars.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import cleaningwars.com.cleaning_wars.entity.User;
+
+import cleaningwars.com.cleaning_wars.entities.User;
+
 import java.util.Optional;
 
 @Repository

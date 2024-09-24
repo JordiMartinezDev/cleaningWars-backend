@@ -18,7 +18,7 @@ import com.auth0.jwt.JWTCreator.Builder;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import cleaningwars.com.cleaning_wars.entity.User;
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.security.JWTConfig;
 import cleaningwars.com.cleaning_wars.security.SecurityConstants;
 import cleaningwars.com.cleaning_wars.security.manager.CustomAuthenticationManager;

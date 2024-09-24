@@ -2,8 +2,8 @@ package cleaningwars.com.cleaning_wars.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import cleaningwars.com.cleaning_wars.entity.Task;
-import cleaningwars.com.cleaning_wars.services.TaskService;
+import cleaningwars.com.cleaning_wars.entities.Task;
+import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
 import jakarta.validation.Valid;
 
 import java.util.List;
