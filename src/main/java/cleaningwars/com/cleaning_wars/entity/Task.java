@@ -18,7 +18,7 @@ public class Task {
 
     private String name;
     private String icon;
-    private int score;
+    private int points;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "home_id", referencedColumnName = "id")

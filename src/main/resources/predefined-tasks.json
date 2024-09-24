@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Change Baby Diaper",
+    "icon": "baby",
+    "points": 10
+  },
+  {
+    "name": "Walk the Dog",
+    "icon": "dog",
+    "points": 20
+  },
+  {
+    "name": "Clean the Bathroom",
+    "icon": "toilet",
+    "points": 25
+  },
+  {
+    "name": "Cook Dinner",
+    "icon": "kitchen-set",
+    "points": 30
+  },
+  {
+    "name": "Do Laundry",
+    "icon": "local-laundry-service",
+    "points": 20
+  },
+  {
+    "name": "Fold Clothes",
+    "icon": "checkroom",
+    "points": 15
+  },
+  {
+    "name": "Iron Clothes",
+    "icon": "iron-board",
+    "points": 10
+  },
+  {
+    "name": "Sweep the Floor",
+    "icon": "broom",
+    "points": 10
+  },
+  {
+    "name": "Take Out Trash",
+    "icon": "trash",
+    "points": 10
+  },
+  {
+    "name": "Make the Bed",
+    "icon": "bed",
+    "points": 10
+  },
+  {
+    "name": "Organize the Closet",
+    "icon": "dresser",
+    "points": 20
+  },
+  {
+    "name": "Water the Plants",
+    "icon": "tree",
+    "points": 5
+  },
+  {
+    "name": "Unload Dishwasher",
+    "icon": "dishwasher",
+    "points": 15
+  },
+  {
+    "name": "Wash Dishes",
+    "icon": "silverware-clean",
+    "points": 20
+  },
+  {
+    "name": "Clean Living Room",
+    "icon": "tool",
+    "points": 25
+  },
+  {
+    "name": "Do Grocery Shopping",
+    "icon": "shopping-cart",
+    "points": 30
+  },
+  {
+    "name": "Set the Dining Table",
+    "icon": "bowl",
+    "points": 5
+  },
+  {
+    "name": "Cook Lunch",
+    "icon": "pot-mix",
+    "points": 25
+  },
+  {
+    "name": "Check Mail",
+    "icon": "circle-check",
+    "points": 5
+  },
+  {
+    "name": "Pack Suitcase",
+    "icon": "suitcase",
+    "points": 15
+  }
+]
