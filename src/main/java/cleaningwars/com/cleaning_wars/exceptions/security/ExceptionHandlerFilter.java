@@ -1,4 +1,4 @@
-package cleaningwars.com.cleaning_wars.security.filter;
+package cleaningwars.com.cleaning_wars.exceptions.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;

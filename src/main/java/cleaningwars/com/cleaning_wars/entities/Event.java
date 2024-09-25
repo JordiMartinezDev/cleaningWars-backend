@@ -34,6 +34,9 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;  
 
-    
+    @ManyToOne
+    @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false) 
+    @JsonIgnore
+    private Home home; 
 }
 
