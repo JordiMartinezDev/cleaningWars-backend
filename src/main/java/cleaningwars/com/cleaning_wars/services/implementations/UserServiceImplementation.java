@@ -27,7 +27,7 @@ public class UserServiceImplementation implements UserService {
     public User createUser(User user) {
 
         user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
-        user.setHome(homeService.createDefaultHome());
+        user.setHome(homeService.createHome(user));
         
         return userRepository.save(user);
     }

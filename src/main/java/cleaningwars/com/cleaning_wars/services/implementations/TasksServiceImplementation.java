@@ -13,10 +13,7 @@ import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
-import jakarta.annotation.PostConstruct;
-import com.fasterxml.jackson.core.type.TypeReference;
-import java.io.IOException;
-import java.io.InputStream;
+
 import org.springframework.core.io.Resource;
 
 @Service
@@ -56,7 +53,7 @@ public class TasksServiceImplementation implements TaskService{
         existingTask.setPoints(updatedTask.getPoints());
         existingTask.setHome(updatedTask.getHome());
 
-        // Save the updated task to the database
+        
         taskRepository.save(existingTask);
     }
     @Override

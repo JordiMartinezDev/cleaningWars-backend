@@ -25,11 +25,6 @@ public class HomeController {
     @Autowired
     UserService userService;
     
- 
-    @PostMapping("/newhome")
-    public void postMethodName(@RequestBody Home home) {
-        homeService.createHome(home);
-    }
 
     
     @PostMapping("/adduser")
