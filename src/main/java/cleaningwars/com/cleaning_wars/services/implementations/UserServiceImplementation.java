@@ -43,11 +43,6 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
     public void updateUser(Long id, User user) {
         
     }

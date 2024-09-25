@@ -5,7 +5,6 @@ import java.util.List;
 import cleaningwars.com.cleaning_wars.entities.User;
 
 public interface UserService {
-    List<User> getAllUsers();
     User createUser(User user);
     User getUserById(Long id);    
     User getUserByUsername(String username);
