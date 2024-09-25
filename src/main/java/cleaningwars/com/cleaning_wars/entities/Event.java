@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Event {
 
     @Id
@@ -22,15 +24,15 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "task_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private Task task;  // Link to the Task
+    private Task task;  
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private User user;  // User who performed the task
+    private User user;  
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;  // Date of the event
+    private Date date;  
 
     
 }

@@ -3,9 +3,15 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
+import cleaningwars.com.cleaning_wars.entities.Task;
+import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.factories.EventFactory;
 import cleaningwars.com.cleaning_wars.repositories.EventRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
+import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
 import java.util.Date;
 import java.util.List;
@@ -14,10 +20,24 @@ import java.util.List;
 public class EventServiceImplementation implements EventService {
 
     @Autowired
-    private EventRepository eventRepository;
+    EventRepository eventRepository;
+    @Autowired
+    TaskService taskService;
+    @Autowired
+    UserService userService;
 
     @Override
-    public Event createEvent(Event event) {
+    public Event createEvent(CreateEventRequest request) {
+        Task task = taskService.getTaskById(request.getTaskId()); 
+        User user = userService.getUserById(request.getUserId());
+        Date date = request.getDate(); 
+
+        if (task == null || user == null) {
+            throw new IllegalArgumentException("Invalid task or user ID");
+        }
+
+        
+        Event event = EventFactory.createEvent(task, user, date);
         return eventRepository.save(event);
     }
 
@@ -25,16 +45,18 @@ public class EventServiceImplementation implements EventService {
     public Event getEventById(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
+
     @Override
     public List<Event> getEventsOnDate(Date date) {
-        // TODO Auto-generated method stub
+        // TODO: Implement this method based on your business logic
         throw new UnsupportedOperationException("Unimplemented method 'getEventsOnDate'");
     }
+
     @Override
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
-    
+
     @Override
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
@@ -42,8 +64,6 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event updateEvent(Long id, Event updatedEvent) {
-        // TODO Auto-generated method stub
-
         if (eventRepository.existsById(id)) {
             updatedEvent.setId(id);
             return eventRepository.save(updatedEvent);

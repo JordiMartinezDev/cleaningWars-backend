@@ -1,6 +1,9 @@
 package cleaningwars.com.cleaning_wars.controllers;
 
+import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
+import cleaningwars.com.cleaning_wars.entities.Task;
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,11 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = eventService.createEvent(event);
-        return ResponseEntity.ok(createdEvent);
+    public ResponseEntity<Event> createEvent(@RequestBody CreateEventRequest request) {
+        // CreateEventRequest contains taskId and userId
+        
+        eventService.createEvent(request);
+        return ResponseEntity.ok(eventService.createEvent(request));
     }
 
     @GetMapping
