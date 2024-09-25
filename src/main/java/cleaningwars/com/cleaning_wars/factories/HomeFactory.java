@@ -5,9 +5,11 @@ import java.util.List;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,15 +18,18 @@ import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
-import lombok.AllArgsConstructor;
 
-@Service
-@AllArgsConstructor
+
+@Component
 public class HomeFactory {
 
-    private HomeRepository homeRepository;
+    @Autowired
+    HomeRepository homeRepository;
+    @Autowired
+    ObjectMapper mapper;
 
     @Value("classpath:predefined-tasks.json")
+    @Autowired
     private Resource tasksJsonFile;
 
     
@@ -49,8 +54,6 @@ public class HomeFactory {
     }
 
     private List<Task> loadPredefinedTasks() {
-
-        ObjectMapper mapper = new ObjectMapper();
 
         try {
           

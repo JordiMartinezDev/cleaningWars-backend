@@ -13,8 +13,6 @@ import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("/api/home")
