@@ -62,9 +62,9 @@ public class HomeServiceImplementation implements HomeService{
             home.getUsers().remove(user);
             user.setHome(null);
     
-            // Save both entities to repo/DB
             userRepository.save(user);
             homeRepository.save(home);
+
         } else {
             throw new RuntimeException("User does not belong to this Home");
         }

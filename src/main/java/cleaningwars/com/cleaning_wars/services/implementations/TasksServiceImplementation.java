@@ -66,23 +66,23 @@ public class TasksServiceImplementation implements TaskService{
     
     
 
-    @PostConstruct
-    public void init() {
-        // Only load default tasks if there are no tasks in the database
-        if (taskRepository.count() == 0) {
-            loadDefaultTasks();
-        }
-    }
+    // @PostConstruct
+    // public void init() {
+    //     // Only load default tasks if there are no tasks in the database
+    //     if (taskRepository.count() == 0) {
+    //         loadDefaultTasks();
+    //     }
+    // }
 
-    private void loadDefaultTasks() {
-        ObjectMapper mapper = new ObjectMapper();
-        try (InputStream inputStream = tasksJsonFile.getInputStream()) {
-            // Mapping JSON data into a list of Task objects
-            List<Task> tasks = mapper.readValue(inputStream, new TypeReference<List<Task>>() {});
-            taskRepository.saveAll(tasks);  
-            System.out.println("Default tasks loaded successfully.");
-        } catch (IOException e) {
-            System.err.println("Unable to load default tasks: " + e.getMessage());
-        }
-    }
+    // private void loadDefaultTasks() {
+    //     ObjectMapper mapper = new ObjectMapper();
+    //     try (InputStream inputStream = tasksJsonFile.getInputStream()) {
+    //         // Mapping JSON data into a list of Task objects
+    //         List<Task> tasks = mapper.readValue(inputStream, new TypeReference<List<Task>>() {});
+    //         taskRepository.saveAll(tasks);  
+    //         System.out.println("Default tasks loaded successfully.");
+    //     } catch (IOException e) {
+    //         System.err.println("Unable to load default tasks: " + e.getMessage());
+    //     }
+    // }
 }
