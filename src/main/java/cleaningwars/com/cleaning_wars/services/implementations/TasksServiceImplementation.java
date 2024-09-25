@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
@@ -61,25 +59,4 @@ public class TasksServiceImplementation implements TaskService{
         taskRepository.deleteById(id);
     }
     
-    
-
-    // @PostConstruct
-    // public void init() {
-    //     // Only load default tasks if there are no tasks in the database
-    //     if (taskRepository.count() == 0) {
-    //         loadDefaultTasks();
-    //     }
-    // }
-
-    // private void loadDefaultTasks() {
-    //     ObjectMapper mapper = new ObjectMapper();
-    //     try (InputStream inputStream = tasksJsonFile.getInputStream()) {
-    //         // Mapping JSON data into a list of Task objects
-    //         List<Task> tasks = mapper.readValue(inputStream, new TypeReference<List<Task>>() {});
-    //         taskRepository.saveAll(tasks);  
-    //         System.out.println("Default tasks loaded successfully.");
-    //     } catch (IOException e) {
-    //         System.err.println("Unable to load default tasks: " + e.getMessage());
-    //     }
-    // }
 }

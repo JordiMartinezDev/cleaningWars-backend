@@ -1,6 +1,5 @@
 package cleaningwars.com.cleaning_wars.services.implementations;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.User;
