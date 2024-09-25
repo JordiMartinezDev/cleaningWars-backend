@@ -36,7 +36,6 @@ public class EventServiceImplementation implements EventService {
             throw new IllegalArgumentException("Invalid task or user ID");
         }
 
-        
         Event event = EventFactory.createEvent(task, user, date);
         return eventRepository.save(event);
     }

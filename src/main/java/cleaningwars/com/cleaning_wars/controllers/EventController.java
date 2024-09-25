@@ -20,8 +20,8 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody CreateEventRequest request) {
-        // CreateEventRequest contains taskId and userId
         
+        // Need to test this, perhaps a try/catch is necessary here
         eventService.createEvent(request);
         return ResponseEntity.ok(eventService.createEvent(request));
     }
