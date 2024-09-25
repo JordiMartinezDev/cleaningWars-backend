@@ -1,6 +1,7 @@
 package cleaningwars.com.cleaning_wars.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,22 +13,25 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+public class Event {
 
-public class Event extends Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Temporal(TemporalType.DATE)
-    private Date eventDate; 
-    
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "task_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private User user;
+    private Task task;  // Link to the Task
 
-    // Not sure if the constructor is needed... Needs testing
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private User user;  // User who performed the task
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;  // Date of the event
+
     
-    public Event(Long id, String name, String icon, int points, Home home, Date eventDate, User user) {
-        super(id, name, icon, points, home);
-        this.eventDate = eventDate;
-        this.user = user;
-    }
 }
+
