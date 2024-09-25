@@ -7,8 +7,8 @@ import cleaningwars.com.cleaning_wars.entities.User;
 
 public interface HomeService {
 
-    Home createDefaultHome();
-    void createHome(Home home);
+   
+    Home createHome(User user);
     Home getHomeById(Long id);
     List<Home> getAllHomes();
     void editHomeName(Home home, Long id);

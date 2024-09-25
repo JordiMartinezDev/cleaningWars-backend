@@ -28,7 +28,7 @@ public class HomeFactory {
     private Resource tasksJsonFile;
 
     
-    public Home createHomeForUser(User user) {
+    public Home createDefaultHome(User user) {
         
         Home newHome = createDefaultTemplate();
         newHome.setUsers(Set.of(user));  
@@ -51,7 +51,7 @@ public class HomeFactory {
     private List<Task> loadPredefinedTasks() {
 
         ObjectMapper mapper = new ObjectMapper();
-        
+
         try {
           
             InputStream inputStream = tasksJsonFile.getInputStream();
