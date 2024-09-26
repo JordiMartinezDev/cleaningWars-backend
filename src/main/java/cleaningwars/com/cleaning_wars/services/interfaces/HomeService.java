@@ -8,7 +8,8 @@ public interface HomeService {
 
    
     Home createHome(User user);
-
+    void updateHomeName(Long homeId, String newName);
+    
     //Invitations
     void inviteUserToHome(Long newHomeId, Long userId);
     void acceptInvitation(Long invitationId);

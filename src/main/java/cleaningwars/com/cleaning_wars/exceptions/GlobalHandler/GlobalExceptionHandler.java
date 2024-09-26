@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
+import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
 import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.exceptions.UserNotFound;
 import cleaningwars.com.cleaning_wars.exceptions.responses.ErrorResponse;
@@ -30,6 +31,12 @@ public class GlobalExceptionHandler {
    
     @ExceptionHandler(UserNotFound.class)
     public ResponseEntity<Object> UserNotFoundHandler(UserNotFound ex){
+        errorResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmptyInput.class)
+    public ResponseEntity<Object> EmptyInputHandler(EmptyInput ex){
         errorResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
     }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
+import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.factories.HomeFactory;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
@@ -95,6 +97,20 @@ public class HomeServiceImplementation implements HomeService{
     public void declineInvitation(Long invitationId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'declineInvitation'");
+    }
+
+    @Override
+    public void updateHomeName(Long homeId, String newName) {
+
+        Home home = homeRepository.findById(homeId)
+        .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
+
+    if (newName == null || newName.trim().isEmpty() || newName.charAt(0) == ' ') {
+        throw new EmptyInput("name");
+    }
+
+    home.setName(newName);
+    homeRepository.save(home);
     }
     
 }
