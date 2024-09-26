@@ -78,5 +78,23 @@ public class HomeServiceImplementation implements HomeService{
     public void deleteHome(Long id) {
         homeRepository.deleteById(id);
     }
+
+    @Override
+    public void inviteUserToHome(Long newHomeId, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inviteUserToHome'");
+    }
+
+    @Override
+    public void acceptInvitation(Long invitationId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'acceptInvitation'");
+    }
+
+    @Override
+    public void declineInvitation(Long invitationId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'declineInvitation'");
+    }
     
 }

@@ -12,6 +12,7 @@ import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
@@ -25,20 +26,24 @@ public class HomeController {
     
 
     
-    @PostMapping("/adduser")
-    public ResponseEntity<String> addUserToHome(@RequestParam Long userId, @RequestParam Long homeId) {
-        
-        User user = userService.getUserById(userId);
-        if (user == null) {
-            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-        }
-
-        
-        Home home = homeService.getHomeById(homeId);
-        if (home == null) {
-            return new ResponseEntity<>("Home not found", HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>("User added to home successfully", HttpStatus.OK);
+    @PostMapping("/{newHomeId}/invite-user/{userId}")
+    public ResponseEntity<String> inviteUserToHome(@PathVariable Long newHomeId, @PathVariable Long userId) {
+        homeService.inviteUserToHome(newHomeId, userId);
+        return ResponseEntity.ok("User has been invited to the new home.");
     }
+
+    
+    @PostMapping("/invitations/{invitationId}/accept")
+    public ResponseEntity<String> acceptInvitation(@PathVariable Long invitationId) {
+        homeService.acceptInvitation(invitationId);
+        return ResponseEntity.ok("Invitation accepted and user has joined the new home.");
+    }
+
+    
+    @PostMapping("/invitations/{invitationId}/decline")
+    public ResponseEntity<String> declineInvitation(@PathVariable Long invitationId) {
+        homeService.declineInvitation(invitationId);
+        return ResponseEntity.ok("Invitation declined.");
+    }
+    
 }
