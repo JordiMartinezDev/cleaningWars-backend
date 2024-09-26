@@ -27,9 +27,9 @@ public class TaskController {
     TaskService taskService;
 
 
-    @GetMapping("/getall")
-    public ResponseEntity<List<Task>> getTaskList() {
-        return new ResponseEntity<>(taskService.getallTasks(),HttpStatus.OK); 
+    @GetMapping("{homeId}/getlist")
+    public ResponseEntity<List<Task>> getTaskList(@PathVariable Long homeId) {
+        return new ResponseEntity<>(taskService.getHomeTasks(homeId),HttpStatus.OK); 
     }
 
     @GetMapping("/{id}")

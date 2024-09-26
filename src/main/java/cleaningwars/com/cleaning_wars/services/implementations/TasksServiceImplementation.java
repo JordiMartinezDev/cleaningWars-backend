@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Task;
+import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
@@ -23,6 +24,17 @@ public class TasksServiceImplementation implements TaskService{
     @Value("classpath:predefined-tasks.json")
     private Resource tasksJsonFile;
 
+
+    
+    @Override
+    public List<Task> getHomeTasks(Long homeId) {
+        homeRepository.findById(homeId)
+                .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
+
+        return taskRepository.findByHomeId(homeId);
+    }
+    
+
     @Override
     public Task addNewTask(Task task, Long homeId){
 
@@ -30,11 +42,7 @@ public class TasksServiceImplementation implements TaskService{
         task.setHome(home);
         return taskRepository.save(task);
 
-    }
-    @Override
-    public List<Task> getallTasks(){
-        return (List<Task>) taskRepository.findAll();
-    }
+    }    
     @Override
     public Task getTaskById(Long id){
         return taskRepository.findById(id).get();
@@ -58,5 +66,6 @@ public class TasksServiceImplementation implements TaskService{
     public void deleteTaskById(Long id){
         taskRepository.deleteById(id);
     }
+    
     
 }
