@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
+import cleaningwars.com.cleaning_wars.exceptions.UserNotFound;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
@@ -48,8 +49,27 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, User user) {
+    public void updateUser(Long id, User updatedUser) {
+        User dbUser = userRepository.findById(id)
+            .orElseThrow(() -> new UserNotFound(id));
+
+            if (updatedUser.getEmail() != null && !updatedUser.getEmail().equals(dbUser.getEmail())) {
+                if (userRepository.findByEmail(updatedUser.getEmail()).isPresent()) {
+                    throw new EmailAlreadyRegistered(updatedUser.getEmail());
+                }
+                dbUser.setEmail(updatedUser.getEmail());
+            }
         
+            if (updatedUser.getUsername() != null) {
+                dbUser.setUsername(updatedUser.getUsername());
+            }
+        
+            if (updatedUser.getPassword() != null) {
+                dbUser.setPassword(passwordEncoder.encodePassword(updatedUser.getPassword())); 
+            }
+        
+            userRepository.save(dbUser);
+    
     }
 
     @Override
