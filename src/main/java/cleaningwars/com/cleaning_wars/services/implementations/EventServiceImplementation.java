@@ -7,6 +7,7 @@ import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
 import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
 import cleaningwars.com.cleaning_wars.factories.EventFactory;
 import cleaningwars.com.cleaning_wars.repositories.EventRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
@@ -32,8 +33,8 @@ public class EventServiceImplementation implements EventService {
         User user = userService.getUserById(request.getUserId());
         Date date = request.getDate(); 
 
-        if (task == null || user == null) {
-            throw new IllegalArgumentException("Invalid task or user ID");
+        if (task == null || user == null || date == null) {
+            throw new EmptyInput("There are empty fields ( task, user, date )");
         }
 
         Event event = EventFactory.createEvent(task, user, date);
@@ -52,8 +53,8 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    public List<Event> getAllEvents(Long homeId) {
+        return eventRepository.findByHomeId(homeId);
     }
 
     @Override

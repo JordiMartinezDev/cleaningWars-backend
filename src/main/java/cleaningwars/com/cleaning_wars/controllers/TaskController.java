@@ -43,7 +43,6 @@ public class TaskController {
     public ResponseEntity<Task> postMethodName(@RequestBody @Valid Task task, @RequestParam Long homeId) {
 
         return new ResponseEntity<>(taskService.addNewTask(task,homeId),HttpStatus.CREATED);
-        // return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
     @PutMapping("/update/{id}")
@@ -51,7 +50,7 @@ public class TaskController {
 
         taskService.updateTask(id, task);
         return new ResponseEntity<>(task, HttpStatus.OK);
-        
+
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id){

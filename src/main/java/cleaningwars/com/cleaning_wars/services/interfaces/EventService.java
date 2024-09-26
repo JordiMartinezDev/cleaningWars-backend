@@ -11,8 +11,8 @@ public interface EventService {
 
     Event createEvent(CreateEventRequest request);;
     Event getEventById(Long id);
-    public List<Event> getEventsOnDate(Date date);
-    List<Event> getAllEvents();
+    List<Event> getEventsOnDate(Date date);
+    List<Event> getAllEvents(Long homeId);
     Event updateEvent(Long id, Event updatedEvent);
     void deleteEvent(Long id);
 }

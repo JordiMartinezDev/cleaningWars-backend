@@ -2,8 +2,7 @@ package cleaningwars.com.cleaning_wars.controllers;
 
 import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
-import cleaningwars.com.cleaning_wars.entities.Task;
-import cleaningwars.com.cleaning_wars.entities.User;
+
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +17,16 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @PostMapping
+    @PostMapping("/new")
     public ResponseEntity<Event> createEvent(@RequestBody CreateEventRequest request) {
         
-        // Need to test this, perhaps a try/catch is necessary here
         eventService.createEvent(request);
         return ResponseEntity.ok(eventService.createEvent(request));
     }
 
-    @GetMapping
-    public ResponseEntity<List<Event>> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
+    @GetMapping("/{homeId}/getlist")
+    public ResponseEntity<List<Event>> getAllEvents(@PathVariable Long homeId) {
+        List<Event> events = eventService.getAllEvents(homeId);
         return ResponseEntity.ok(events);
     }
 
