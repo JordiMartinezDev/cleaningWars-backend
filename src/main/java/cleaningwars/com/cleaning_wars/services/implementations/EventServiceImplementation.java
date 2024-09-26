@@ -8,6 +8,7 @@ import cleaningwars.com.cleaning_wars.entities.Event;
 import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
+import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.factories.EventFactory;
 import cleaningwars.com.cleaning_wars.repositories.EventRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
@@ -43,7 +44,9 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event getEventById(Long id) {
-        return eventRepository.findById(id).orElse(null);
+
+        return eventRepository.findById(id)
+           .orElseThrow(() -> new EntityNotFound(id, Event.class));
     }
 
     @Override
@@ -64,12 +67,14 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event updateEvent(Long id, Event updatedEvent) {
-        if (eventRepository.existsById(id)) {
-            updatedEvent.setId(id);
-            return eventRepository.save(updatedEvent);
-        }
-        return null;
-    }
+    Event dbEvent = eventRepository.findById(id)
+        .orElseThrow(() -> new EntityNotFound(id, Event.class));
 
+    dbEvent.setTask(updatedEvent.getTask());
+    dbEvent.setUser(updatedEvent.getUser());
+    dbEvent.setDate(updatedEvent.getDate());
+
+    return eventRepository.save(dbEvent);
+}
     
 }
