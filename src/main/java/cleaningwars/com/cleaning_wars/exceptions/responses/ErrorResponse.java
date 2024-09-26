@@ -1,9 +1,8 @@
 package cleaningwars.com.cleaning_wars.exceptions.responses;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 public class ErrorResponse {
     
@@ -12,12 +11,12 @@ public class ErrorResponse {
     private LocalDateTime timestamp;
 
     public ErrorResponse(String message) {
-        timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now();
         this.message = message;
     }
 
     public String getMessage() {
-        return this.message;
+        return message;
     }
 
     public void setMessage(String message) {
@@ -25,7 +24,7 @@ public class ErrorResponse {
     }
 
     public LocalDateTime getTimestamp() {
-        return this.timestamp;
+        return timestamp;
     }
 
     public void setTimestamp(LocalDateTime timestamp) {

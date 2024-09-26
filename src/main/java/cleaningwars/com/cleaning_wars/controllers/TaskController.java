@@ -28,9 +28,8 @@ public class TaskController {
 
 
     @GetMapping("/getall")
-    public List<Task> getTaskList() {
-        return taskService.getallTasks(); 
-        // Can be done this way, no need for the status codes and so on... it looks to be handled automatically
+    public ResponseEntity<List<Task>> getTaskList() {
+        return new ResponseEntity<>(taskService.getallTasks(),HttpStatus.OK); 
     }
 
     @GetMapping("/{id}")

@@ -3,6 +3,7 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.User;
+import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
@@ -10,7 +11,6 @@ import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,12 +23,17 @@ public class UserServiceImplementation implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public User createUser(User user) {
+    public User createUser(User newUser) {
        
-        user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
-        user.setHome(homeService.createHome(user));
+        if(userRepository.findByEmail(newUser.getEmail()).isPresent())
+        {
+            throw new EmailAlreadyRegistered(newUser.getEmail());
+        }
+
+        newUser.setPassword(passwordEncoder.encodePassword(newUser.getPassword()));
+        newUser.setHome(homeService.createHome(newUser));
         
-        return userRepository.save(user);
+        return userRepository.save(newUser);
     }
 
     @Override

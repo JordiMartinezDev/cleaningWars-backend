@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
 import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.exceptions.responses.ErrorResponse;
 
@@ -14,16 +15,15 @@ public class GlobalExceptionHandler {
     ErrorResponse errorResponse;
 
     @ExceptionHandler(EntityNotFound.class)
-    public ResponseEntity<Object> handleEntityNotFound(EntityNotFound ex) {
+    public ResponseEntity<Object> EntityNotFoundHandler(EntityNotFound ex) {
         errorResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
-    //Add other ExceptionHandlers..
-
-    // @ExceptionHandler({TheClass}.class)
-    // public ResponseEntity<Object> exceptionDesiredName({TheClass} ex) {
-    //     errorResponse = new ErrorResponse(ex.getMessage());
-    //     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    // }
+    @ExceptionHandler(EmailAlreadyRegistered.class)
+    public ResponseEntity<Object> EmailAlreadyRegisteredHandler(EmailAlreadyRegistered ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT); 
+    }
+   
 }

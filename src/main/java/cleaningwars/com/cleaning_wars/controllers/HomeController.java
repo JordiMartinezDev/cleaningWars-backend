@@ -1,14 +1,11 @@
 package cleaningwars.com.cleaning_wars.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cleaningwars.com.cleaning_wars.entities.Home;
-import cleaningwars.com.cleaning_wars.entities.User;
+
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 

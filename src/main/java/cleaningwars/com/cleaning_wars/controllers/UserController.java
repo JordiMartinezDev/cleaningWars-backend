@@ -35,7 +35,6 @@ public class UserController {
         
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable Long id) {
