@@ -46,14 +46,13 @@ public class TaskController {
         // return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
-    @PutMapping("/{id}")
-    public void putMethodName(@PathVariable String id, @RequestBody Task task) {
-    }
     @PutMapping("/update/{id}")
-public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
-    taskService.updateTask(id, task);
-    return new ResponseEntity<>(task, HttpStatus.OK);
-}
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
+
+        taskService.updateTask(id, task);
+        return new ResponseEntity<>(task, HttpStatus.OK);
+        
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id){
         taskService.deleteTaskById(id);

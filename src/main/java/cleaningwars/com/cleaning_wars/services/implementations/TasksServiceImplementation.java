@@ -51,7 +51,7 @@ public class TasksServiceImplementation implements TaskService{
     @Override
     public void updateTask(Long id, Task updatedTask) {
         // Find the existing task by ID
-        Task existingTask = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        Task existingTask = taskRepository.findById(id).orElseThrow(() -> new EntityNotFound(id, Task.class));
 
         // Replace the fields with the updatedTaskData
         existingTask.setName(updatedTask.getName());
