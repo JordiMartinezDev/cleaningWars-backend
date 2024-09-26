@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import cleaningwars.com.cleaning_wars.entities.Home;
 
-public interface HomeRepository extends CrudRepository<Home,Long>{
+public interface HomeRepository extends CrudRepository<Home, Long> {
 
-    
-}  
+}

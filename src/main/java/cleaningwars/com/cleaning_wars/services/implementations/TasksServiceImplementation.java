@@ -16,56 +16,61 @@ import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
 import org.springframework.core.io.Resource;
 
 @Service
-public class TasksServiceImplementation implements TaskService{
+public class TasksServiceImplementation implements TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
-    @Autowired HomeRepository homeRepository;
+    @Autowired
+    HomeRepository homeRepository;
     @Value("classpath:predefined-tasks.json")
     private Resource tasksJsonFile;
 
-
-    
     @Override
     public List<Task> getHomeTasks(Long homeId) {
+
         homeRepository.findById(homeId)
                 .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
 
         return taskRepository.findByHomeId(homeId);
+
     }
-    
 
     @Override
-    public Task addNewTask(Task task, Long homeId){
+    public Task addNewTask(Task task, Long homeId) {
 
         Home home = homeRepository.findById(homeId).get();
         task.setHome(home);
         return taskRepository.save(task);
 
-    }    
+    }
+
     @Override
-    public Task getTaskById(Long id){
+    public Task getTaskById(Long id) {
+
         return taskRepository.findById(id).get();
+
     }
 
     @Override
     public void updateTask(Long id, Task updatedTask) {
 
         Task existingTask = taskRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFound(id, Task.class));
+                .orElseThrow(() -> new EntityNotFound(id, Task.class));
 
         existingTask.setName(updatedTask.getName());
         existingTask.setIcon(updatedTask.getIcon());
         existingTask.setPoints(updatedTask.getPoints());
         existingTask.setHome(updatedTask.getHome());
 
-        
         taskRepository.save(existingTask);
+
     }
+
     @Override
-    public void deleteTaskById(Long id){
+    public void deleteTaskById(Long id) {
+
         taskRepository.deleteById(id);
+
     }
-    
-    
+
 }

@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 public class JWTConfig {
 
     @Value("${jwt.secret}")
-    private  String secretKey;  // This should map to your property
+    private String secretKey; // This should map to your property
 
-    public  String getSecretKey() {
+    public String getSecretKey() {
         return secretKey;
+
     }
 }

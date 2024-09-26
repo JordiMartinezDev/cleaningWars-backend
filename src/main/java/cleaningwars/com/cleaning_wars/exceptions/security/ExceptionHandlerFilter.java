@@ -14,39 +14,30 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ExceptionHandlerFilter extends OncePerRequestFilter{
+public class ExceptionHandlerFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        try{
+        try {
             filterChain.doFilter(request, response);
+        } catch (EntityNotFoundException e) {
+
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().write("User not found");
+            response.getWriter().flush();
+
+        } catch (JWTVerificationException e) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("JWT not valid");
+            response.getWriter().flush();
         }
-        catch(EntityNotFoundException e){
 
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        response.getWriter().write("User not found");
-        response.getWriter().flush();
-        
-    } 
-    catch(JWTVerificationException e)
-    {
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.getWriter().write("JWT not valid");
-        response.getWriter().flush();
-    }
-
-        catch(RuntimeException e){
-
-            // Optionally include stack trace in the response for debugging purposes (not recommended in production)
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
+        catch (RuntimeException e) {
 
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Error occurred: " + exceptionAsString);
         }
     }
-    
+
 }

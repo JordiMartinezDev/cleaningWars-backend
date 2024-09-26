@@ -11,4 +11,5 @@ import cleaningwars.com.cleaning_wars.entities.Event;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByHomeId(Long homeId);
+
 }

@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -25,30 +22,32 @@ public class UserController {
     UserService userService;
     @Autowired
     HomeService homeService;
-    
 
-    @PostMapping("/register") 
+    @PostMapping("/register")
     public ResponseEntity<User> registerUser(@Valid @RequestBody User newUser) {
-         userService.createUser(newUser);
-         return new ResponseEntity<>(HttpStatus.CREATED);
+
+        userService.createUser(newUser);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<User> postMethodName(@RequestBody User user) {
-        
+
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable Long id) {
+
         User user = userService.getUserById(id);
         return user != null ? ResponseEntity.ok(user.getUsername()) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{id}/update")
     public ResponseEntity<User> getMethodName(@PathVariable Long id, @RequestParam User updatedUser) {
+
         userService.updateUser(id, updatedUser);
-        return new ResponseEntity<>(updatedUser,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(updatedUser, HttpStatus.ACCEPTED);
     }
-    
+
 }

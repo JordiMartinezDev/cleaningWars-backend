@@ -1,4 +1,5 @@
 package cleaningwars.com.cleaning_wars.unit.services;
+
 import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
 import cleaningwars.com.cleaning_wars.entities.Task;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EventServiceTest{
+public class EventServiceTest {
 
     @Mock
     private EventRepository eventRepository;
@@ -42,14 +43,15 @@ public class EventServiceTest{
         MockitoAnnotations.openMocks(this);
     }
 
+    // Mocking data
+    Task task = new Task();
+    User user = new User();
+    Date date = new Date();
+
     @Test
     void createEvent_success() {
-        // Mocking data
-        Task task = new Task();
-        User user = new User();
-        Date date = new Date();
 
-        CreateEventRequest request = new CreateEventRequest();
+        CreateEventRequest request = new CreateEventRequest(task.getId(), user.getId(), date);
         request.setTaskId(1L);
         request.setUserId(1L);
         request.setDate(date);
@@ -73,7 +75,8 @@ public class EventServiceTest{
     @Test
     void createEvent_taskOrUserNotFound_throwsException() {
         // Mocking data
-        CreateEventRequest request = new CreateEventRequest();
+        CreateEventRequest request = new CreateEventRequest(task.getId(), user.getId(), date);
+
         request.setTaskId(1L);
         request.setUserId(1L);
 
@@ -97,10 +100,12 @@ public class EventServiceTest{
         // checks
         assertNull(foundEvent);
     }
+
     @Test
     void testGetEventsOnDate() {
-        
+
     }
+
     @Test
     void testGetEventById() {
         Event event = new Event();
@@ -111,7 +116,8 @@ public class EventServiceTest{
         assertNotNull(result);
         assertEquals(event, result);
     }
-     @Test
+
+    @Test
     void testUpdateEvent() {
         Event event = new Event();
         event.setId(1L);
@@ -124,6 +130,7 @@ public class EventServiceTest{
         assertNotNull(updatedEvent);
         assertEquals(1L, updatedEvent.getId());
     }
+
     @Test
     void testDeleteEvent() {
         eventService.deleteEvent(1L);

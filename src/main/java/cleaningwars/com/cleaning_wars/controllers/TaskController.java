@@ -23,13 +23,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController()
 @RequestMapping("/api/task")
 public class TaskController {
+
     @Autowired
     TaskService taskService;
 
-
     @GetMapping("{homeId}/getlist")
     public ResponseEntity<List<Task>> getTaskList(@PathVariable Long homeId) {
-        return new ResponseEntity<>(taskService.getHomeTasks(homeId),HttpStatus.OK); 
+
+        return new ResponseEntity<>(taskService.getHomeTasks(homeId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -38,13 +39,13 @@ public class TaskController {
         return new ResponseEntity<>(taskService.getTaskById(id), HttpStatus.OK);
 
     }
-    
+
     @PostMapping("/addnewtask")
     public ResponseEntity<Task> postMethodName(@RequestBody @Valid Task task, @RequestParam Long homeId) {
 
-        return new ResponseEntity<>(taskService.addNewTask(task,homeId),HttpStatus.CREATED);
+        return new ResponseEntity<>(taskService.addNewTask(task, homeId), HttpStatus.CREATED);
     }
-    
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
 
@@ -52,10 +53,12 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.OK);
 
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
+
         taskService.deleteTaskById(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    
+
 }

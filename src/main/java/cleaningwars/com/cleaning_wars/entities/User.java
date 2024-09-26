@@ -18,15 +18,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users") // users is a reserved keyword in SQL. Therefore, we can't use it as a table name
+@Table(name = "users") // users is a reserved keyword in SQL. Therefore, we can't use it as a table
+                       // name
 public class User {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,16 +42,15 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    //Password should be hashed using BCrypt
+    // Password should be hashed using BCrypt
     @Column(nullable = false)
     @NotBlank(message = "Password is blank")
     @NonNull
-    private String password;  
+    private String password;
 
     @ManyToOne(cascade = CascadeType.PERSIST) // Cascade persist operation to save Home automatically
     @JoinColumn(name = "home_id", referencedColumnName = "id")
     @JsonIgnore
     private Home home;
 
-    
 }

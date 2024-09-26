@@ -16,37 +16,43 @@ import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 
 @Service
-public class HomeServiceImplementation implements HomeService{
+public class HomeServiceImplementation implements HomeService {
 
     @Autowired
     HomeRepository homeRepository;
 
     @Autowired
     UserRepository userRepository;
-    
-    @Autowired
-    HomeFactory homeFactory;  
 
-    
+    @Autowired
+    HomeFactory homeFactory;
+
     public Home createHome(User user) {
+
         return homeFactory.createDefaultHome(user);
+
     }
 
     public Home getHomeById(Long id) {
+
         return homeRepository.findById(id).orElse(null);
+
     }
 
     public List<Home> getAllHomes() {
+
         return (List<Home>) homeRepository.findAll();
+
     }
 
     public void editHomeName(Home home, Long id) {
-        
+
     }
 
     public void addUserToHome(Long homeId, User user) {
+
         Home home = homeRepository.findById(homeId)
-                                  .orElseThrow(() -> new RuntimeException("Home not found"));
+                .orElseThrow(() -> new RuntimeException("Home not found"));
 
         if (home.getUsers() == null) {
             home.setUsers(new HashSet<>());
@@ -57,14 +63,15 @@ public class HomeServiceImplementation implements HomeService{
 
         userRepository.save(user);
         homeRepository.save(home);
+
     }
 
     public void removeUserFromHome(Long homeId, Long userId) {
 
         Home home = homeRepository.findById(homeId)
-                                  .orElseThrow(() -> new RuntimeException("Home not found"));
+                .orElseThrow(() -> new RuntimeException("Home not found"));
         User user = userRepository.findById(userId)
-                                  .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (home.getUsers() != null && home.getUsers().contains(user)) {
             home.getUsers().remove(user);
@@ -84,33 +91,40 @@ public class HomeServiceImplementation implements HomeService{
     @Override
     public void inviteUserToHome(Long newHomeId, Long userId) {
         // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'inviteUserToHome'");
+
     }
 
     @Override
     public void acceptInvitation(Long invitationId) {
+
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'acceptInvitation'");
+
     }
 
     @Override
     public void declineInvitation(Long invitationId) {
+
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'declineInvitation'");
+
     }
 
     @Override
     public void updateHomeName(Long homeId, String newName) {
 
         Home home = homeRepository.findById(homeId)
-        .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
+                .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
 
-    if (newName == null || newName.trim().isEmpty() || newName.charAt(0) == ' ') {
-        throw new EmptyInput("name");
+        if (newName == null || newName.trim().isEmpty() || newName.charAt(0) == ' ') {
+            throw new EmptyInput("name");
+        }
+
+        home.setName(newName);
+        homeRepository.save(home);
+
     }
 
-    home.setName(newName);
-    homeRepository.save(home);
-    }
-    
 }

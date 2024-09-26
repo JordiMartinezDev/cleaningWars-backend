@@ -1,6 +1,5 @@
 package cleaningwars.com.cleaning_wars.entities;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +18,7 @@ public class Invitation {
     private Long userId;
 
     @ManyToOne
+    @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false)
     private Home newHome;
 
 }
-

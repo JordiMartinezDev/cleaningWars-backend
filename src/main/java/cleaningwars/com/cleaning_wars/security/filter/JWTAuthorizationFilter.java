@@ -22,37 +22,39 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-
 @AllArgsConstructor
 @Component
-public class JWTAuthorizationFilter extends OncePerRequestFilter{
-
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
     @Autowired
     JWTConfig jwtConfig;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+
             throws ServletException, IOException {
 
+        if (request.getRequestURI().equals(SecurityConstants.REGISTER_PATH)) {
 
-            if (request.getRequestURI().equals(SecurityConstants.REGISTER_PATH)) {
-                filterChain.doFilter(request, response);
-                return;
-            }
-            
-            // Retrieving and remove the "Bearer" to get the token itself
-            String authHeader = request.getHeader("Authorization");
-            String token = authHeader.replace(SecurityConstants.BEARER, "");
+            filterChain.doFilter(request, response);
+            return;
 
-            String user = JWT.require(Algorithm.HMAC512(jwtConfig.getSecretKey()))
+        }
+
+        // Retrieving and remove the "Bearer" to get the token itself
+        String authHeader = request.getHeader("Authorization");
+        String token = authHeader.replace(SecurityConstants.BEARER, "");
+
+        String user = JWT.require(Algorithm.HMAC512(jwtConfig.getSecretKey()))
                 .build()
                 .verify(token)
                 .getSubject();
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
+
     }
-    
+
 }

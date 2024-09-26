@@ -2,7 +2,6 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
 import cleaningwars.com.cleaning_wars.entities.Task;
@@ -30,9 +29,10 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event createEvent(CreateEventRequest request) {
-        Task task = taskService.getTaskById(request.getTaskId()); 
+
+        Task task = taskService.getTaskById(request.getTaskId());
         User user = userService.getUserById(request.getUserId());
-        Date date = request.getDate(); 
+        Date date = request.getDate();
 
         if (task == null || user == null || date == null) {
             throw new EmptyInput("There are empty fields ( task, user, date )");
@@ -46,35 +46,40 @@ public class EventServiceImplementation implements EventService {
     public Event getEventById(Long id) {
 
         return eventRepository.findById(id)
-           .orElseThrow(() -> new EntityNotFound(id, Event.class));
+                .orElseThrow(() -> new EntityNotFound(id, Event.class));
+
     }
 
     @Override
     public List<Event> getEventsOnDate(Date date) {
         // TODO: Implement this method based on your business logic
         throw new UnsupportedOperationException("Unimplemented method 'getEventsOnDate'");
+
     }
 
     @Override
     public List<Event> getAllEvents(Long homeId) {
         return eventRepository.findByHomeId(homeId);
+
     }
 
     @Override
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
+
     }
 
     @Override
     public Event updateEvent(Long id, Event updatedEvent) {
-    Event dbEvent = eventRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFound(id, Event.class));
+        Event dbEvent = eventRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound(id, Event.class));
 
-    dbEvent.setTask(updatedEvent.getTask());
-    dbEvent.setUser(updatedEvent.getUser());
-    dbEvent.setDate(updatedEvent.getDate());
+        dbEvent.setTask(updatedEvent.getTask());
+        dbEvent.setUser(updatedEvent.getUser());
+        dbEvent.setDate(updatedEvent.getDate());
 
-    return eventRepository.save(dbEvent);
-}
-    
+        return eventRepository.save(dbEvent);
+
+    }
+
 }

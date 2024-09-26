@@ -19,7 +19,6 @@ import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 
-
 @Component
 public class HomeFactory {
 
@@ -32,37 +31,38 @@ public class HomeFactory {
     @Autowired
     private Resource tasksJsonFile;
 
-    
     public Home createDefaultHome(User user) {
-        
+
         Home newHome = createDefaultTemplate();
-        newHome.setUsers(Set.of(user));  
+        newHome.setUsers(Set.of(user));
         return homeRepository.save(newHome);
+
     }
 
-    
     private Home createDefaultTemplate() {
 
         Home home = new Home();
         home.setName("Default Home");
 
         List<Task> tasks = loadPredefinedTasks();
-        tasks.forEach(task -> task.setHome(home)); 
+        tasks.forEach(task -> task.setHome(home));
         home.setTasks(new HashSet<>(tasks));
 
         return home;
+
     }
 
     private List<Task> loadPredefinedTasks() {
 
         try {
-          
+
             InputStream inputStream = tasksJsonFile.getInputStream();
-            
-            TypeReference<List<Task>> taskListType = new TypeReference<List<Task>>() {};
+
+            TypeReference<List<Task>> taskListType = new TypeReference<List<Task>>() {
+            };
             return mapper.readValue(inputStream, taskListType);
         } catch (IOException e) {
-           
+
             throw new RuntimeException("Failed to load predefined tasks", e);
         }
     }

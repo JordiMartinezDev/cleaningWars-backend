@@ -1,13 +1,11 @@
 package cleaningwars.com.cleaning_wars.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Entity
@@ -24,19 +22,18 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "task_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private Task task;  
+    private Task task;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private User user;  
+    private User user;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;  
+    private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false) 
+    @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
-    private Home home; 
+    private Home home;
 }
-

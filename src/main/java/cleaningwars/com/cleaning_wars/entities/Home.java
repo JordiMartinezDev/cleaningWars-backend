@@ -11,9 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,9 +27,13 @@ public class Home {
     @NotBlank(message = "Name cannot be blank")
     private String name = "Home";
 
-    @OneToMany(mappedBy = "home") 
+    @OneToMany(mappedBy = "home")
     @JsonIgnore
     private Set<User> users;
+
+    @OneToMany(mappedBy = "newHome", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Invitation> invitations;
 
     @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)
     @JsonIgnore
