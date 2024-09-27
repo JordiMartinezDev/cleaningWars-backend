@@ -2,8 +2,10 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 
 import org.springframework.stereotype.Service;
 
+import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
+import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.exceptions.UserNotFound;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.PasswordEncoder;
@@ -89,6 +91,15 @@ public class UserServiceImplementation implements UserService {
         else
             throw new EntityNotFoundException("User with ID " + id + " not found");
 
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFound(email));
+
+        return user;
     }
 
 }

@@ -7,19 +7,15 @@ import cleaningwars.com.cleaning_wars.repositories.TaskRepository;
 import cleaningwars.com.cleaning_wars.services.implementations.TasksServiceImplementation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TaskServiceTest {
 
     @Mock

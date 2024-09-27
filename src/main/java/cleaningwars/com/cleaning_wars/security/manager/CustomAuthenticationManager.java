@@ -15,18 +15,19 @@ import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor
-public class CustomAuthenticationManager implements AuthenticationManager{
+public class CustomAuthenticationManager implements AuthenticationManager {
 
     private UserService userService;
     private PasswordEncoder pwEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        User user = userService.getUserByUsername(authentication.getName());
-        if(!pwEncoder.matches(authentication.getCredentials().toString(), user.getPassword())){
+
+        User user = userService.getUserByEmail(authentication.getName());
+        if (!pwEncoder.matches(authentication.getCredentials().toString(), user.getPassword())) {
             throw new BadCredentialsException("Incorrect Login/Password");
         }
         return new UsernamePasswordAuthenticationToken(authentication.getName(), user.getPassword());
     }
-    
+
 }

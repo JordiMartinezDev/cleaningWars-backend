@@ -7,4 +7,8 @@ public class EntityNotFound extends RuntimeException {
         super("The " + entity.getSimpleName().toLowerCase() + "with id " + id + " doesn't exist");
 
     }
+
+    public <T> EntityNotFound(T identifier) {
+        super("The " + identifier + " was not found");
+    }
 }

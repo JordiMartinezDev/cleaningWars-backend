@@ -39,7 +39,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             User loginRequest = new ObjectMapper().readValue(request.getInputStream(), User.class);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    loginRequest.getUsername(),
+
+                    loginRequest.getEmail(),
                     loginRequest.getPassword()
 
             );
@@ -59,7 +60,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException failed) throws IOException, ServletException {
-        throw new BadCredentialsException("Incorrect User or Password");
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"message\": \"Incorrect User or Password\"}");
+        response.getWriter().flush();
     }
 
     @Override
