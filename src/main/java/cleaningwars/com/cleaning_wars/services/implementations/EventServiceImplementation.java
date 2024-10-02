@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
+import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Task;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
@@ -11,6 +12,7 @@ import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.factories.EventFactory;
 import cleaningwars.com.cleaning_wars.repositories.EventRepository;
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
+import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
 import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
@@ -26,19 +28,22 @@ public class EventServiceImplementation implements EventService {
     TaskService taskService;
     @Autowired
     UserService userService;
+    @Autowired
+    HomeService homeService;
 
     @Override
     public Event createEvent(CreateEventRequest request) {
 
         Task task = taskService.getTaskById(request.getTaskId());
         User user = userService.getUserById(request.getUserId());
+        Home home = homeService.getHomeById(user.getHome().getId()); // Users always belong to a single home
         Date date = request.getDate();
 
         if (task == null || user == null || date == null) {
             throw new EmptyInput("There are empty fields ( task, user, date )");
         }
 
-        Event event = EventFactory.createEvent(task, user, date);
+        Event event = EventFactory.createEvent(home, task, user, date);
         return eventRepository.save(event);
     }
 
