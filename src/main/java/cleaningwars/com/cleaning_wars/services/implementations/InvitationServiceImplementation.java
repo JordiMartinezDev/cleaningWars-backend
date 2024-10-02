@@ -101,8 +101,16 @@ public class InvitationServiceImplementation implements InvitationService {
 
     @Override
     public List<Invitation> getInvitationsbyUserId(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getInvitationsForUser'");
+
+        User user = userService.getUserById(userId);
+
+        if (user == null) {
+            new EntityNotFound(userId, User.class);
+        }
+
+        List<Invitation> invitations = invitationRepository.findByInvitedUserId(userId);
+
+        return invitations;
     }
 
     @Override
