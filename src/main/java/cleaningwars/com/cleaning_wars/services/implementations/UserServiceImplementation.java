@@ -1,8 +1,8 @@
 package cleaningwars.com.cleaning_wars.services.implementations;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmailAlreadyRegistered;
 import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 @Service
+@Lazy
 @AllArgsConstructor
 public class UserServiceImplementation implements UserService {
 

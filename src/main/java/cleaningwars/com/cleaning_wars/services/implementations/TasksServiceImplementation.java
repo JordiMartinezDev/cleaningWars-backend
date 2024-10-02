@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import cleaningwars.com.cleaning_wars.entities.Home;
@@ -16,12 +17,15 @@ import cleaningwars.com.cleaning_wars.services.interfaces.TaskService;
 import org.springframework.core.io.Resource;
 
 @Service
+@Lazy
 public class TasksServiceImplementation implements TaskService {
 
     @Autowired
-    private TaskRepository taskRepository;
+    TaskRepository taskRepository;
+
     @Autowired
     HomeRepository homeRepository;
+
     @Value("classpath:predefined-tasks.json")
     private Resource tasksJsonFile;
 

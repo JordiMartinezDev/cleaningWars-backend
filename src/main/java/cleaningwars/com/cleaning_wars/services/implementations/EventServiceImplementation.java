@@ -1,6 +1,7 @@
 package cleaningwars.com.cleaning_wars.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import cleaningwars.com.cleaning_wars.dto.EventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
@@ -20,14 +21,22 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Lazy
 public class EventServiceImplementation implements EventService {
 
     @Autowired
+    @Lazy
     EventRepository eventRepository;
+
     @Autowired
+    @Lazy
     TaskService taskService;
+
     @Autowired
+    @Lazy
     UserService userService;
+
+    @Lazy
     @Autowired
     HomeService homeService;
 

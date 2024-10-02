@@ -8,10 +8,12 @@ public interface InvitationService {
 
     Invitation inviteUserToHome(Long homeId, Long userId);
 
-    void acceptInvitation(Long invitationId, Long userId);
+    Invitation acceptInvitation(Long invitationId, Long userId);
 
-    void declineInvitation(Long invitationId, Long userId);
+    Invitation declineInvitation(Long invitationId, Long userId);
 
     List<Invitation> getInvitationsbyUserId(Long userId);
+
+    List<Invitation> getInvitationsByHomeId(Long homeId);
 
 }

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -18,23 +19,50 @@ import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
 import cleaningwars.com.cleaning_wars.security.JWTConfig;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
+import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 
 @Service
+@Lazy
 public class HomeServiceImplementation implements HomeService {
 
     @Autowired
+    @Lazy
     HomeRepository homeRepository;
 
     @Autowired
+    @Lazy
     UserRepository userRepository;
 
     @Autowired
+    @Lazy
     HomeFactory homeFactory;
+
+    @Autowired
+    @Lazy
+    UserService userService;
 
     public Home createHome(User user) {
 
         return homeFactory.createDefaultHome(user);
 
+    }
+
+    public void addUser(Long homeId, User user) {
+
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
+
+        // This should never happen, homes must have a user always, otherwise a home is
+        // deleted
+        if (home.getUsers() == null) {
+            home.setUsers(new HashSet<>());
+        }
+
+        home.getUsers().add(user);
+        user.setHome(home);
+
+        userRepository.save(user);
+        homeRepository.save(home);
     }
 
     public Home getHomeById(Long id) {
@@ -70,12 +98,14 @@ public class HomeServiceImplementation implements HomeService {
 
     }
 
+    @Override
     public void removeUserFromHome(Long homeId, Long userId) {
 
         Home home = homeRepository.findById(homeId)
-                .orElseThrow(() -> new RuntimeException("Home not found"));
+                .orElseThrow(() -> new EntityNotFound(homeId, Home.class));
+
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new EntityNotFound(userId, User.class));
 
         if (home.getUsers() != null && home.getUsers().contains(user)) {
             home.getUsers().remove(user);

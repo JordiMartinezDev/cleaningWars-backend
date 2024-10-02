@@ -1,5 +1,7 @@
 package cleaningwars.com.cleaning_wars.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +31,7 @@ public class Invitation {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Home home;
 
     private InvitationStatus status = InvitationStatus.PENDING;

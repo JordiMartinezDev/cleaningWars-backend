@@ -7,6 +7,8 @@ public interface HomeService {
 
     Home createHome(User user);
 
+    void addUser(Long homeId, User user);
+
     void updateHomeName(Long homeId, String newName);
 
     Home getHomeById(Long id);
