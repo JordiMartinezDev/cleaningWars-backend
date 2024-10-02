@@ -28,7 +28,6 @@ public class Home {
     private String name = "Home";
 
     @OneToMany(mappedBy = "home")
-    @JsonIgnore
     private Set<User> users;
 
     @OneToMany(mappedBy = "newHome", cascade = CascadeType.ALL)

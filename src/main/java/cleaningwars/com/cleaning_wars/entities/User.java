@@ -46,6 +46,7 @@ public class User {
     @Column(nullable = false)
     @NotBlank(message = "Password is blank")
     @NonNull
+    @JsonIgnore
     private String password;
 
     @ManyToOne(cascade = CascadeType.PERSIST) // Cascade persist operation to save Home automatically
