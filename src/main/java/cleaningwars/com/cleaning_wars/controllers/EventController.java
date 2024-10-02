@@ -1,6 +1,6 @@
 package cleaningwars.com.cleaning_wars.controllers;
 
-import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
+import cleaningwars.com.cleaning_wars.dto.EventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
 
 import cleaningwars.com.cleaning_wars.services.interfaces.EventService;
@@ -18,7 +18,7 @@ public class EventController {
     private EventService eventService;
 
     @PostMapping("/new")
-    public ResponseEntity<Event> createEvent(@RequestBody CreateEventRequest request) {
+    public ResponseEntity<Event> createEvent(@RequestBody EventRequest request) {
 
         eventService.createEvent(request);
         return ResponseEntity.ok(eventService.createEvent(request));
@@ -39,7 +39,7 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event updatedEvent) {
+    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody EventRequest updatedEvent) {
 
         Event event = eventService.updateEvent(id, updatedEvent);
         return ResponseEntity.ok(event);

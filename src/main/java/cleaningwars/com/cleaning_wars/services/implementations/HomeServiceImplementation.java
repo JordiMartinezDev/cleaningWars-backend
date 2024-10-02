@@ -89,7 +89,11 @@ public class HomeServiceImplementation implements HomeService {
     }
 
     public void deleteHome(Long id) {
-        homeRepository.deleteById(id);
+
+        Home home = homeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound(id, Home.class));
+
+        homeRepository.delete(home);
     }
 
     @Override

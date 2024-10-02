@@ -33,6 +33,7 @@ public class UserServiceImplementation implements UserService {
 
         newUser.setPassword(passwordEncoder.encodePassword(newUser.getPassword()));
         newUser.setHome(homeService.createHome(newUser));
+        newUser.setInvitations(null);
 
         return userRepository.save(newUser);
 

@@ -33,7 +33,7 @@ public class Home {
     @OneToMany(mappedBy = "home")
     private Set<User> users;
 
-    @OneToMany(mappedBy = "home")
+    @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)
     private List<Invitation> invitations;
 
     @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)

@@ -2,10 +2,8 @@ package cleaningwars.com.cleaning_wars.controllers;
 
 import cleaningwars.com.cleaning_wars.entities.Invitation;
 import cleaningwars.com.cleaning_wars.services.interfaces.InvitationService;
-import io.micrometer.core.ipc.http.HttpSender.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cleaningwars.com.cleaning_wars.dto.CreateEventRequest;
+import cleaningwars.com.cleaning_wars.dto.EventRequest;
 import cleaningwars.com.cleaning_wars.entities.Event;
 import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Task;
@@ -32,7 +32,7 @@ public class EventServiceImplementation implements EventService {
     HomeService homeService;
 
     @Override
-    public Event createEvent(CreateEventRequest request) {
+    public Event createEvent(EventRequest request) {
 
         Task task = taskService.getTaskById(request.getTaskId());
         User user = userService.getUserById(request.getUserId());
@@ -75,12 +75,12 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event updateEvent(Long id, Event updatedEvent) {
+    public Event updateEvent(Long id, EventRequest updatedEvent) {
         Event dbEvent = eventRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFound(id, Event.class));
 
-        dbEvent.setTask(updatedEvent.getTask());
-        dbEvent.setUser(updatedEvent.getUser());
+        dbEvent.setTask(taskService.getTaskById(updatedEvent.getTaskId()));
+        dbEvent.setUser(userService.getUserById(updatedEvent.getUserId()));
         dbEvent.setDate(updatedEvent.getDate());
 
         return eventRepository.save(dbEvent);

@@ -67,7 +67,10 @@ public class TasksServiceImplementation implements TaskService {
     @Override
     public void deleteTaskById(Long id) {
 
-        taskRepository.deleteById(id);
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound(id, Task.class));
+
+        taskRepository.delete(task);
 
     }
 

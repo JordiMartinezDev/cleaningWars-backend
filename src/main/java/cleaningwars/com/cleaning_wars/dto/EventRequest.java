@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CreateEventRequest {
+public class EventRequest {
 
     private Long taskId;
     private Long userId;

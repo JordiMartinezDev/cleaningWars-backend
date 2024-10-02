@@ -24,12 +24,10 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "task_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Task task;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private User user;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,6 +36,5 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Home home;
 }

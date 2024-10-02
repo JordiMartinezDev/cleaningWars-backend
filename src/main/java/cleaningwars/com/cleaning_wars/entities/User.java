@@ -1,6 +1,9 @@
 package cleaningwars.com.cleaning_wars.entities;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
@@ -47,7 +50,6 @@ public class User {
     @Column(nullable = false)
     @NotBlank(message = "Password is blank")
     @NonNull
-    @JsonIgnore
     private String password;
 
     @ManyToOne(cascade = CascadeType.PERSIST) // Cascade persist operation to save Home automatically
