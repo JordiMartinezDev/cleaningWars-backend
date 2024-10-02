@@ -25,9 +25,9 @@ public class Invitation {
 
     @ManyToOne
     @JoinColumn(name = "invited_user_id", referencedColumnName = "id", nullable = false)
-    private Long invitedUserId;
+    private User invitedUser;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "home_id", referencedColumnName = "id", nullable = false)
     private Home home;
 

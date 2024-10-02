@@ -2,7 +2,6 @@ package cleaningwars.com.cleaning_wars.services.implementations;
 
 import cleaningwars.com.cleaning_wars.entities.Invitation;
 import cleaningwars.com.cleaning_wars.entities.Invitation.InvitationStatus;
-import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.InvitationRepository;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;

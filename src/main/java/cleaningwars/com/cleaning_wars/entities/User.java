@@ -40,7 +40,6 @@ public class User {
 
     @NotBlank(message = "Email is blank")
     @NonNull
-
     @Column(nullable = false, unique = true)
     private String email;
 
