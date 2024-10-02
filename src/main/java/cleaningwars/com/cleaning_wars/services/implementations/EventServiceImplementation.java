@@ -39,8 +39,8 @@ public class EventServiceImplementation implements EventService {
         Home home = homeService.getHomeById(user.getHome().getId()); // Users always belong to a single home
         Date date = request.getDate();
 
-        if (task == null || user == null || date == null) {
-            throw new EmptyInput("There are empty fields ( task, user, date )");
+        if (task == null || user == null || date == null || home == null) {
+            throw new EmptyInput("There are empty fields ( home, task, user, date )");
         }
 
         Event event = EventFactory.createEvent(home, task, user, date);

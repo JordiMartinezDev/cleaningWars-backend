@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -80,13 +79,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(secretKey));
 
-        String refreshToken = JWT.create()
-                .withSubject(authResult.getName())
-                .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.REFRESH_TOKEN_EXPIRATION)) // longer
-                                                                                                                  // expiration
-                .sign(Algorithm.HMAC512(secretKey));
+        // String refreshToken = JWT.create()
+        // .withSubject(authResult.getName())
+        // .withExpiresAt(new Date(System.currentTimeMillis() +
+        // SecurityConstants.REFRESH_TOKEN_EXPIRATION)) // longer
+        // // expiration
+        // .sign(Algorithm.HMAC512(secretKey));
 
         response.addHeader(SecurityConstants.AUTHORIZATION, SecurityConstants.BEARER + token);
-        response.addHeader(SecurityConstants.REFRESH_TOKEN, refreshToken);
+        // response.addHeader(SecurityConstants.REFRESH_TOKEN, refreshToken);
     }
 }

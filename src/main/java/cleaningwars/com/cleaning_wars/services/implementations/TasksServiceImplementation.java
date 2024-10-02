@@ -52,7 +52,7 @@ public class TasksServiceImplementation implements TaskService {
     }
 
     @Override
-    public void updateTask(Long id, Task updatedTask) {
+    public Task updateTask(Long id, Task updatedTask) {
 
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFound(id, Task.class));
@@ -60,10 +60,8 @@ public class TasksServiceImplementation implements TaskService {
         existingTask.setName(updatedTask.getName());
         existingTask.setIcon(updatedTask.getIcon());
         existingTask.setPoints(updatedTask.getPoints());
-        existingTask.setHome(updatedTask.getHome());
 
-        taskRepository.save(existingTask);
-
+        return taskRepository.save(existingTask);
     }
 
     @Override
