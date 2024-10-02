@@ -12,6 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Set;
+
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,9 +33,8 @@ public class Home {
     @OneToMany(mappedBy = "home")
     private Set<User> users;
 
-    @OneToMany(mappedBy = "newHome", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Invitation> invitations;
+    @OneToMany(mappedBy = "home")
+    private List<Invitation> invitations;
 
     @OneToMany(mappedBy = "home", cascade = CascadeType.ALL)
     @JsonIgnore

@@ -55,6 +55,7 @@ public class User {
     @JsonIgnore
     private Home home;
 
+    @Column(nullable = true)
     @OneToMany(mappedBy = "invitedUser", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Invitation> invitations;
