@@ -1,6 +1,8 @@
 package cleaningwars.com.cleaning_wars.services.implementations;
 
+import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.Invitation;
+import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.entities.Invitation.InvitationStatus;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.InvitationRepository;
@@ -28,12 +30,12 @@ public class InvitationServiceImplementation implements InvitationService {
     @Override
     public Invitation inviteUserToHome(Long homeId, Long userId) {
 
-        var home = homeRepository.findById(homeId).orElseThrow(() -> new RuntimeException("Home not found"));
-        var invitedUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Home home = homeRepository.findById(homeId).orElseThrow(() -> new RuntimeException("Home not found"));
+        User invitedUser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         Invitation invitation = new Invitation();
         invitation.setHome(home);
-        invitation.setInvitedUserId(userId);
+        invitation.setInvitedUser(invitedUser);
         invitation.setStatus(InvitationStatus.PENDING);
 
         return invitationRepository.save(invitation);
@@ -52,7 +54,7 @@ public class InvitationServiceImplementation implements InvitationService {
     }
 
     @Override
-    public List<Invitation> getInvitationsForUser(Long userId) {
+    public List<Invitation> getInvitationsbyUserId(Long userId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getInvitationsForUser'");
     }

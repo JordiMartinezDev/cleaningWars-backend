@@ -12,5 +12,6 @@ public interface InvitationService {
 
     void declineInvitation(Long invitationId, Long userId);
 
-    List<Invitation> getInvitationsForUser(Long userId);
+    List<Invitation> getInvitationsbyUserId(Long userId);
+
 }
