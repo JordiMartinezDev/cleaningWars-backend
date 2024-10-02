@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+
 import cleaningwars.com.cleaning_wars.entities.Home;
 import cleaningwars.com.cleaning_wars.entities.User;
 import cleaningwars.com.cleaning_wars.exceptions.EmptyInput;
@@ -13,6 +16,7 @@ import cleaningwars.com.cleaning_wars.exceptions.EntityNotFound;
 import cleaningwars.com.cleaning_wars.factories.HomeFactory;
 import cleaningwars.com.cleaning_wars.repositories.HomeRepository;
 import cleaningwars.com.cleaning_wars.repositories.UserRepository;
+import cleaningwars.com.cleaning_wars.security.JWTConfig;
 import cleaningwars.com.cleaning_wars.services.interfaces.HomeService;
 
 @Service
@@ -89,11 +93,24 @@ public class HomeServiceImplementation implements HomeService {
     }
 
     @Override
-    public void inviteUserToHome(Long newHomeId, Long userId) {
-        // TODO Auto-generated method stub
+    public void inviteUserToHome(Long newHomeId, Long userId, String token) {
+        JWTConfig secretKey = new JWTConfig();
+        String userEmail = JWT.require(Algorithm.HMAC512(secretKey.getSecretKey()))
+                .build()
+                .verify(token.replace("Bearer ", ""))
+                .getSubject();
 
-        throw new UnsupportedOperationException("Unimplemented method 'inviteUserToHome'");
+        User inviter = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
 
+        if (!inviter.getHome().getId().equals(newHomeId)) {
+            throw new RuntimeException("You can only invite users to your own home.");
+        }
+
+        User userToInvite = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User to invite not found"));
+
+        addUserToHome(newHomeId, userToInvite);
     }
 
     @Override

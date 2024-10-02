@@ -18,7 +18,7 @@ public interface HomeService {
     void deleteHome(Long id);
 
     // ------ Invitations -------
-    void inviteUserToHome(Long newHomeId, Long userId);
+    void inviteUserToHome(Long newHomeId, Long userId, String token);
 
     void acceptInvitation(Long invitationId);
 

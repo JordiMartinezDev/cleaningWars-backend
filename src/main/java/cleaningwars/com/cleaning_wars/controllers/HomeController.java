@@ -13,8 +13,8 @@ import cleaningwars.com.cleaning_wars.services.interfaces.UserService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/home")
@@ -37,10 +37,9 @@ public class HomeController {
         return ResponseEntity.ok("Updated Successfully");
     }
 
-    @PostMapping("/{newHomeId}/invite-user/{userId}")
-    public ResponseEntity<String> inviteUserToHome(@PathVariable Long newHomeId, @PathVariable Long userId) {
-
-        homeService.inviteUserToHome(newHomeId, userId);
+    public ResponseEntity<String> inviteUserToHome(@PathVariable Long newHomeId, @PathVariable Long userId,
+            @RequestHeader("Authorization") String token) {
+        homeService.inviteUserToHome(newHomeId, userId, token);
         return ResponseEntity.ok("User has been invited to the new home.");
     }
 
